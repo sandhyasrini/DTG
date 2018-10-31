@@ -1,0 +1,630 @@
+{
+  "$jason": {
+    "head": {
+
+      "data": {
+        "members": [
+          { "name": "Homer" },
+          { "name": "Marge" },
+          { "name": "Lisa" },
+          { "name": "Bart" },
+          { "name": "Maggie" }
+        ]
+      },
+      "templates": {
+
+        "body": {
+          "header": {
+            "title": {
+              "type": "label",
+              "text": "Process Plant Supervisor's Log - 2",
+              "style": {
+                "align": "left",
+
+                "background" :"#9e8421"
+              }
+            },
+            "style": {
+              "background" :"#d3b023",
+              "color" : "#ffffff",
+              "font" : "Avenir-Bold",
+              "padding" : "10"
+            }
+          },
+
+          "sections": [
+
+            {
+              "style": {
+                "color" : "#ffffff"
+              },
+
+              "items": [
+
+                {
+                  "type": "horizontal",
+                  "style": {
+                    "background": "#aaaaaa",
+                    "spacing": "10",
+                    "color" : "#ffffff"
+                  },
+                  "components": [
+
+                    {
+                      "type": "textfield",
+                      "name": "date",
+                      "value":"11/12/2018",
+                      "style": {
+                        "placeholder_color": "#cecece",
+                        "font": "HelveticaNeue",
+                        "width": "160",
+                        "height": "37",
+                        "size": "14",
+                        "align" : "center",
+                        "background": "#ffffff",
+                        "padding": "10",
+                        "border":"#000000"
+
+                      }
+                    },
+                    {
+                      "type": "textfield",
+                      "name": "shift",
+                      "value":"Day Shift",
+                      "style": {
+                        "placeholder_color": "#cecece",
+                        "font": "HelveticaNeue",
+                        "width": "160",
+                        "height": "37",
+                        "align" : "center",
+                        "size": "14",
+                        "background": "#ffffff",
+                        "padding": "10",
+                        "color":"#000000",
+                        "border":"#000000"
+                      }
+                    },
+                    {
+                      "type": "textfield",
+                      "name": "password",
+                      "value":"* J. Pronovost",
+                      "style": {
+                        "placeholder_color": "#cecece",
+                        "font": "HelveticaNeue",
+                        "width": "160",
+                        "height": "37",
+                        "size": "14",
+                        "align" : "center",
+                        "background": "#ffffff",
+                        "padding": "10",
+                        "color":"#000000",
+                        "border":"#000000"
+
+
+
+
+                      }
+                    },
+                    {
+                      "type": "label",
+                      "text": "Signed",
+                      "style": {
+                        "font": "Avenir-Bold",
+                        "size": "16",
+                        "color": "#ffffff",
+                        "align": "center"
+
+                      }
+                    },
+                    {
+                      "type": "textfield",
+                      "name": "password",
+                      "value": "Jean Pronovost",
+                      "style": {
+                        "placeholder_color": "#cecece",
+                        "font": "HelveticaNeue",
+                        "width": "180",
+                        "height": "37",
+                        "size": "14",
+                        "align" : "center",
+                        "background": "#ffffff",
+                        "padding": "10",
+                        "color":"#000000",
+                        "border":"#000000"
+
+
+
+
+                      }
+                    }
+                  ]
+                },
+
+                {
+                  "type" : "vertical",
+                  "style" : {
+                    "align" : "fill",
+                    "color":"#ffffff",
+                    "padding" : "1",
+                    "border" :"#ffffff",
+                    "spacing": "5"
+
+
+                  },
+                  "components" : [
+                    {
+                      "type" :"label",
+                      "text" : "Primary Crusher",
+                      "align" : "left" ,
+                      "background": "#ace248",
+                      "style": {
+                        "font": "Avenir-Bold",
+                        "size": "16",
+                        "width": "900",
+                        "color": "#ffffff",
+                        "border": "#ffffff",
+                        "background": "#5ec6ff",
+                        "spacing": "30",
+                        "padding":"5"
+
+
+                      }
+                    },
+                    {
+                      "type": "horizontal",
+                      "style":{
+                        "width" : "900"
+                      },
+                      "components": [
+                        {
+
+                          "type":"vertical",
+                          "style":{
+                            "border": "#002151",
+                            "align" : "center"
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "Tonnes Milled",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "width" : "115",
+                              "align" : "center",
+                              "color": "#ffffff",
+                              "border": "#111111",
+                              "padding":"5",
+                              "gradient":"true",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "label",
+                              "text": "129",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "115",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                            }]
+                        },
+                        {
+                          "type":"vertical",
+                          "style":{
+                            "border": "#002151",
+                            "align" : "center"
+
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "Balls added",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "color": "#ffffff",
+                              "width" : "115",
+                              "align" : "center",
+                              "gradient":"true",
+                              "border": "#111111",
+                              "padding":"5",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "label",
+                              "text": "37%",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "115",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                            }]
+                        },
+                        {
+                          "type":"vertical",
+                          "style":{
+                            "border": "#002151",
+                            "align" : "center"
+
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "SAG",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "width" : "115",
+                              "gradient":"true",
+                              "align" : "center",
+                              "color": "#ffffff",
+                              "border": "#111111",
+                              "padding":"5",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "label",
+                              "text": "37%",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "115",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                            }]
+                        },
+                        {
+                          "type":"vertical",
+                          "style":{
+                            "border": "#002151",
+                            "align" : "center"
+
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "BM : Rec",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "width" : "115",
+                              "gradient":"true",
+                              "align" : "center",
+                              "color": "#ffffff",
+                              "border": "#111111",
+                              "padding":"5",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "label",
+                              "text": "37%",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "115",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type":"vertical",
+                          "style":{
+                            "border": "#002151",
+                            "align" : "center"
+
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "Pur: Rec",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "width" : "115",
+                              "align" : "center",
+                              "gradient":"true",
+                              "color": "#ffffff",
+                              "border": "#111111",
+                              "padding":"5",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "label",
+                              "text": "37%",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "115",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type":"vertical",
+                          "style":{
+                            "border": "#002151",
+                            "align" : "center"
+
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "New",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "width" : "115",
+                              "gradient":"true",
+                              "align" : "center",
+                              "color": "#ffffff",
+                              "border": "#111111",
+                              "padding":"5",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "label",
+                              "text": "37%",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "115",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+
+                  ]
+                },
+                {
+                  "type" : "horizontal",
+                  "style" : {
+                    "align" : "fill",
+                    "background": "#0a0a08",
+                    "color":"#ffffff"
+
+                  },
+                  "style" : {
+                    "align" : "fill",
+                    "background": "#0a0a08",
+                    "color":"#ffffff",
+                    "height": "40",
+                    "padding" : "10",
+                    "align" : "center"
+                  },
+                  "components" : [
+                    {
+                      "type" :"label",
+                      "text" : "DownTime",
+                      "align" : "left",
+                      "style": {
+                        "font": "Avenir-Bold",
+                        "size": "16",
+                        "color": "#ffffff",
+                        "height": "40"
+
+                      }
+                    }
+                  ]
+                },
+
+                {
+                  "type" : "vertical",
+                  "style" : {
+                    "align" : "fill",
+                    "border":"#0a0a08",
+                    "padding" : "10"
+
+                  },
+                  "components" : [
+                    {
+                      "type" :"label",
+                      "text" : "Incidents/ Accidents - Nil",
+                      "align" : "left" ,
+                      "background": "#ace248",
+                      "style": {
+                        "font": "Avenir",
+                        "size": "14",
+                        "color":"#000000"
+
+
+                      }
+                    },
+                    {
+                      "type" :"label",
+                      "text" : "Primary Air Compressor Inspection and restart procedure training completed Crew 100",
+                      "align" : "left" ,
+                      "background": "#ace248",
+                      "style": {
+                        "font": "Avenir",
+                        "size": "14",
+                        "color":"#000000"
+                      }
+                    }
+
+                  ]
+                },
+                {
+                  "type" : "horizontal",
+                  "style" : {
+                    "align" : "fill",
+                    "background": "#0a0a08",
+                    "color":"#ffffff"
+
+                  },
+                  "style" : {
+                    "align" : "fill",
+                    "background": "#0a0a08",
+                    "color":"#ffffff",
+                    "height": "40",
+                    "padding" : "10",
+                    "align" : "center"
+                  },
+                  "components" : [
+                    {
+                      "type" :"label",
+                      "text" : "Incidents / Safety Notifications",
+                      "align" : "left",
+                      "style": {
+                        "font": "Avenir-Bold",
+                        "size": "16",
+                        "color": "#ffffff",
+                        "height": "40"
+
+                      }
+                    }
+                  ]
+                },
+
+                {
+                  "type" : "vertical",
+                  "style" : {
+                    "align" : "fill",
+                    "border":"#0a0a08",
+                    "padding" : "10"
+
+                  },
+                  "components" : [
+                    {
+                      "type" :"label",
+                      "text" : "Incidents/ Accidents - Nil",
+                      "align" : "left" ,
+                      "background": "#ace248",
+                      "style": {
+                        "font": "Avenir",
+                        "size": "14",
+                        "color":"#000000"
+
+
+                      }
+                    },
+                    {
+                      "type" :"label",
+                      "text" : "Primary Air Compressor Inspection and restart procedure training completed Crew 100",
+                      "align" : "left" ,
+                      "background": "#ace248",
+                      "style": {
+                        "font": "Avenir",
+                        "size": "14",
+                        "color":"#000000"
+                      }
+                    }
+
+                  ]
+                },
+                {
+                  "type": "horizontal",
+                  "style": {
+                    "align": "fill",
+                    "color": "#ffffff",
+                    "padding": "1",
+                    "border": "#ffffff",
+                    "align":"right"
+                  },
+                  "components": [
+
+                            {
+                              "type": "button",
+                              "text": "Next",
+                              "style": {
+                                "width": "100",
+                                "height":"30",
+                                "align":"right",
+                                "background": "#00ff00",
+                                "color": "#ffffff",
+                                "font": "HelveticaNeue",
+                                "size": "14",
+                                "corner_radius": "2"
+                              },
+                              "href": {
+                                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/home.json",
+                                "view": "jason"
+                              }
+
+                            }
+
+                  ]
+
+                }
+              
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

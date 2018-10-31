@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Jasonette</string>
+    <string name="url">https://sandhyasrini.github.io/json/index.json</string>
+    <string name="launch">file://preload.json</string>
+</resources>
