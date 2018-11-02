@@ -20,7 +20,6 @@
               "text": "Process Plant Supervisor's Log",
               "style": {
                 "align": "left",
-
                 "background" :"#9e8421"
               }
             },
@@ -30,6 +29,10 @@
               "font" : "Avenir-Bold",
               "padding" : "5"
             }
+          },
+          "style":{
+          
+            "background":"#aaaaaa"
           },
 
           "sections": [
@@ -205,6 +208,7 @@
                     "border_width":"2",
                     "padding" : "10",
                     "border":"#111111"
+                    
 
                   },
                   "components" : [
@@ -226,38 +230,46 @@
                 },
                 {
                   "type" : "vertical",
-                  "style" : {
-                    "align" : "fill",
-                    "color":"#ffffff",
-                    "padding" : "1",
-                    "border" :"#ffffff",
-                      "spacing": "5",
-                    "background": "#aaaaaa"
-
-
+                  "style": {
+                    "align": "fill",
+                    "color": "#ffffff",
+                    "padding": "1",
+                    "background":"#aaaaaa"
                   },
-                  "components" : [
-                    {
-                      "type" :"label",
-                      "text" : "Primary Crusher",
-                      "align" : "left" ,
-                      "background": "#ace248",
-                      "style": {
-                        "font": "Avenir-Bold",
-                        "size": "18",
-                        "width": "700",
-                        "color": "#ffffff",
-                        "background": "#5ec6ff",
-                        "spacing": "30",
-                        "padding":"5"
+                  "components": [
+                    {"type": "vertical",
+                      "style" : {
+                        "align" : "fill",
+                        "color":"#ffffff",
+                        "padding" : "1",
+                        "spacing": "5"
 
 
-                      }
+                      },
+                      "components":[
+                        {
+                          "type" :"label",
+                          "text" : "Crusher Downtime",
+                          "align" : "left" ,
+                          "background": "#ace248",
+                          "style": {
+                            "font": "Avenir-Bold",
+                            "size": "18",
+                            "width": "700",
+                            "color": "#ffffff",
+                            "border": "#ffffff",
+                            "background": "#5ec6ff",
+                            "spacing": "30",
+                            "padding":"5"
+
+
+                          }
                     },
                     {
                       "type": "horizontal",
                       "style":{
-                        "width" : "700"
+                        "width" : "700",
+                        "background":"#aaaaaa"
                       },
                       "components": [
                         {
@@ -280,6 +292,7 @@
                             "padding":"5",
                             "spacing": "5",
                             "gradient":"true"
+                            
 
 
 
@@ -369,7 +382,6 @@
                               "gradient":"true"
 
 
-
                             }
                           },
                             {
@@ -439,13 +451,15 @@
                     }
 
                   ]
+                }]
                 },
                 {
                   "type": "horizontal",
                   "style": {
                     "align": "fill",
                     "color": "#ffffff",
-                    "padding": "1"
+                    "padding": "1",
+                    "background":"#aaaaaa"
                   },
                   "components": [
                     {"type": "vertical",
@@ -785,7 +799,7 @@
                   ]
 
                 }
-
+               
                 ]
             }
           ]
