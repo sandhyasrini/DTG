@@ -249,7 +249,7 @@
                       "components":[
                         {
                           "type" :"label",
-                          "text" : "Crusher Downtime",
+                          "text" : "Primary Crusher",
                           "align" : "left" ,
                           "background": "#ace248",
                           "style": {
@@ -299,8 +299,8 @@
                           }
                         },
                           {
-                            "type": "label",
-                            "text": "129",
+                            "type": "textfield",
+                            "value": "129",
                             "style": {
                               "font": "Avenir-Bold",
                               "size": "14",
@@ -343,8 +343,8 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "56%",
+                              "type": "textfield",
+                              "value": "56%",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
@@ -385,8 +385,8 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "129",
+                              "type": "textfield",
+                              "value": "129",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
@@ -428,8 +428,8 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "37%",
+                              "type": "textfield",
+                              "value": "37%",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
@@ -522,8 +522,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "Yes",
+                                  "type": "textfield",
+                                  "value": "Yes",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -566,8 +566,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "No",
+                                  "type": "textfield",
+                                  "value": "No",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -609,8 +609,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "Yes",
+                                  "type": "textfield",
+                                  "value": "Yes",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -652,8 +652,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "3.25 hrs",
+                                  "type": "textfield",
+                                  "value": "3.25 hrs",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -696,8 +696,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "Yes",
+                                  "type": "textfield",
+                                  "value": "Yes",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -740,8 +740,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "No",
+                                  "type": "textfield",
+                                  "value": "No",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",

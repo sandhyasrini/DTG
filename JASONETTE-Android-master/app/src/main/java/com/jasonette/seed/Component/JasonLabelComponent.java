@@ -28,6 +28,8 @@ public class JasonLabelComponent {
                 ((TextView)view).setText(component.getString("text"));
                 JasonComponent.build(view, component, parent, context);
 
+                view.setContentDescription("hf_use_text");
+
                 String type;
                 JSONObject style = JasonHelper.style(component, context);
                 type = component.getString("type");
