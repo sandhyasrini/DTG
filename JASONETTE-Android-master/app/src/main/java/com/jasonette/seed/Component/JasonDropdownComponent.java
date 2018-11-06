@@ -24,8 +24,8 @@ public class JasonDropdownComponent {
                 view = JasonComponent.build(view, component, parent, context);
                 final Spinner sSpinner = ((Spinner) view);
                     sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
-                    sSpinner.setMinimumWidth(20);
-                    sSpinner.setMinimumHeight(10);
+                    sSpinner.setMinimumWidth(30);
+                    sSpinner.setMinimumHeight(5);
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
                     String[] items;
