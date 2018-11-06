@@ -1,6 +1,7 @@
 package com.jasonette.seed.Component;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ public class JasonDropdownComponent {
             try {
                 view = JasonComponent.build(view, component, parent, context);
                 final Spinner sSpinner = ((Spinner) view);
-
+                    sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
+                    sSpinner.setMinimumWidth(20);
+                    sSpinner.setMinimumHeight(10);
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
                     String[] items;
@@ -34,11 +37,18 @@ public class JasonDropdownComponent {
                     final int color;
                     final float size;
                     final int padding;
+                    final int bgColor;
                     JSONObject style = JasonHelper.style(component, context);
                     if (style.has("color"))
                         color = JasonHelper.parse_color(style.getString("color"));
                     else
                         color = 0;
+
+                    if(style.has("background"))
+                        bgColor = JasonHelper.parse_color(style.getString("background"));
+                    else
+                        bgColor = 0;
+
 
                     if (style.has("size"))
                         size = Float.parseFloat(style.getString("size"));
@@ -91,6 +101,7 @@ public class JasonDropdownComponent {
                                     ((TextView) v).setTextSize(size);
                                     ((TextView) v).setTextColor(color);
                                     ((TextView) v).setCompoundDrawablePadding(padding);
+                                    ((TextView) v).setBackgroundColor(bgColor);
                                     return v;
                                 }
                             };
