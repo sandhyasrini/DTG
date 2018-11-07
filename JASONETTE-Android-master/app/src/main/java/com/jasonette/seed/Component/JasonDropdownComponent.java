@@ -26,6 +26,7 @@ public class JasonDropdownComponent {
                 final Spinner sSpinner = ((Spinner) view);
                     sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
                     sSpinner.setMinimumWidth(30);
+                    sSpinner.setTextAlignment( View.TEXT_ALIGNMENT_TEXT_START);
                     sSpinner.setPadding(0,0,0,0);
 
                 if (component.has("name")) {
