@@ -25,7 +25,7 @@ public class JasonDropdownComponent {
                 final Spinner sSpinner = ((Spinner) view);
                     sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
                     sSpinner.setMinimumWidth(30);
-                    sSpinner.setMinimumHeight(5);
+                    sSpinner.setMinimumHeight(4);
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
                     String[] items;
@@ -53,12 +53,12 @@ public class JasonDropdownComponent {
                     if (style.has("size"))
                         size = Float.parseFloat(style.getString("size"));
                     else
-                        size = 5;
+                        size = 15;
 
                     if (style.has("padding"))
                         padding = Integer.parseInt(style.getString("padding"));
                     else
-                        padding = 0;
+                        padding = 3;
 
 
                     //Setting content description. realwear uses this as voice tag
