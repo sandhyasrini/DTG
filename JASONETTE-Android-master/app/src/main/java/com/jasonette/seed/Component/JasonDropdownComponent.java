@@ -113,15 +113,12 @@ public class JasonDropdownComponent {
                                 sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Integer.parseInt(style.getString("height"))));
 
                             }
-                            if(style.has("height")){
+                            else if(style.has("height")){
                                 sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, Integer.parseInt(style.getString("height"))));
 
                             }
-                            else {
-//                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(sSpinner.getWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                            }
-                            if(style.has("width")){
+                            else if(style.has("width")){
                                 sSpinner.setLayoutParams(new LinearLayout.LayoutParams( Integer.parseInt(style.getString("width")), LinearLayout.LayoutParams.WRAP_CONTENT));
 
                             }
