@@ -2,6 +2,7 @@ package com.jasonette.seed.Component;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,19 @@ public class JasonDropdownComponent {
                     if (component.has("contentDescription")) {
                         Log.i("Content Description--->", component.getString("contentDescription"));
                         ((Spinner) view).setContentDescription(component.getString("contentDescription"));
+                    }
+                    if(style.has("border")){
+
+                        int bordercolor = JasonHelper.parse_color(style.getString("border"));
+                        GradientDrawable gd = new GradientDrawable();
+                        gd.setShape(GradientDrawable.RECTANGLE);
+                        gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
+                        gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
+                        gd.setStroke(1,  bordercolor);
+                        gd.setBounds(2, 2, 2, 2);
+                        ((Spinner) view).setBackground(gd);
+
+
                     }
 
 
