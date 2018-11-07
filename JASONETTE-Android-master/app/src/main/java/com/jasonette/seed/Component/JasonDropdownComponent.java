@@ -42,7 +42,7 @@ public class JasonDropdownComponent {
                     if (style.has("color"))
                         color = JasonHelper.parse_color(style.getString("color"));
                     else
-                        color = 0;
+                        color = Color.parseColor("#111111");
 
                     if(style.has("background"))
                         bgColor = JasonHelper.parse_color(style.getString("background"));
