@@ -109,6 +109,10 @@ public class JasonDropdownComponent {
                             };
 
                             sSpinner.setAdapter(adapter);
+                            if(style.has("height") && style.has("width")){
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(Integer.parseInt(style.getString("width")), Integer.parseInt(style.getString("height"))));
+
+                            }
                             if(style.has("height")){
                                 sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, Integer.parseInt(style.getString("height"))));
 
