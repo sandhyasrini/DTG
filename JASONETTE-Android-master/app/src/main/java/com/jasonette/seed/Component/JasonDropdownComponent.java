@@ -25,6 +25,7 @@ public class JasonDropdownComponent {
                 view = JasonComponent.build(view, component, parent, context);
                 final Spinner sSpinner = ((Spinner) view);
                     sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
+                    sSpinner.setMinimumWidth(30);
                     sSpinner.setPadding(0,0,0,0);
 
                 if (component.has("name")) {
@@ -109,13 +110,18 @@ public class JasonDropdownComponent {
 
                             sSpinner.setAdapter(adapter);
                             if(style.has("height")){
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(sSpinner.getWidth(), Integer.parseInt(style.getString("height"))));
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, Integer.parseInt(style.getString("height"))));
 
                             }
                             else {
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(sSpinner.getWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));
+//                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(sSpinner.getWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));
 
                             }
+                            if(style.has("width")){
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams( Integer.parseInt(style.getString("width")), LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                            }
+
                             sSpinner.setSelection(defaultSelPos);
                         } catch (Exception e) {
                             Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
