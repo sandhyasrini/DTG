@@ -157,7 +157,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
         if(rootLayout == null) {
             // Create the root layout
             rootLayout = new RelativeLayout(JasonViewActivity.this);
-            rootLayout.setContentDescription("hf_no_number|hf_hide_help");
+//            rootLayout.setContentDescription("hf_no_number|hf_hide_help");
             rootLayout.setLayoutParams(rlp);
             rootLayout.setFitsSystemWindows(true);
         }
@@ -199,7 +199,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
             // Create LinearLayout
             sectionLayout = new LinearLayout(JasonViewActivity.this);
             sectionLayout.setOrientation(LinearLayout.VERTICAL);
-            sectionLayout.setContentDescription("hf_no_number|hf_hide_help");
+//            sectionLayout.setContentDescription("hf_no_number|hf_hide_help");
             LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             sectionLayout.setLayoutParams(p);
 

@@ -39,8 +39,13 @@ public class JasonComponentFactory {
             } else if(type.equalsIgnoreCase("slider")) {
                 view = JasonSliderComponent.build(prototype, component, parent, context);
             } else if(type.equalsIgnoreCase("switch")) {
-                view = JasonSwitchComponent.build(prototype, component, parent, context);
-            } else {
+                view = JasonSwitchComponent.build( prototype, component, parent, context );
+            }
+                else if(type.equalsIgnoreCase("dropdown")) {
+                    view = JasonDropdownComponent.build(prototype, component, parent, context);
+                }
+
+             else {
                 // Non-existent component warning
                 JSONObject error_component = new JSONObject(component.toString());
                 error_component.put("type", "label");
