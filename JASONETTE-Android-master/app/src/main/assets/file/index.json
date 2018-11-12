@@ -20,7 +20,6 @@
               "text": "Process Plant Supervisor's Log",
               "style": {
                 "align": "left",
-
                 "background" :"#9e8421"
               }
             },
@@ -30,6 +29,10 @@
               "font" : "Avenir-Bold",
               "padding" : "5"
             }
+          },
+          "style":{
+          
+            "background":"#aaaaaa"
           },
 
           "sections": [
@@ -205,6 +208,7 @@
                     "border_width":"2",
                     "padding" : "10",
                     "border":"#111111"
+                    
 
                   },
                   "components" : [
@@ -226,38 +230,46 @@
                 },
                 {
                   "type" : "vertical",
-                  "style" : {
-                    "align" : "fill",
-                    "color":"#ffffff",
-                    "padding" : "1",
-                    "border" :"#ffffff",
-                      "spacing": "5",
-                    "background": "#aaaaaa"
-
-
+                  "style": {
+                    "align": "fill",
+                    "color": "#ffffff",
+                    "padding": "1",
+                    "background":"#aaaaaa"
                   },
-                  "components" : [
-                    {
-                      "type" :"label",
-                      "text" : "Primary Crusher",
-                      "align" : "left" ,
-                      "background": "#ace248",
-                      "style": {
-                        "font": "Avenir-Bold",
-                        "size": "18",
-                        "width": "700",
-                        "color": "#ffffff",
-                        "background": "#5ec6ff",
-                        "spacing": "30",
-                        "padding":"5"
+                  "components": [
+                    {"type": "vertical",
+                      "style" : {
+                        "align" : "fill",
+                        "color":"#ffffff",
+                        "padding" : "1",
+                        "spacing": "5"
 
 
-                      }
+                      },
+                      "components":[
+                        {
+                          "type" :"label",
+                          "text" : "Primary Crusher",
+                          "align" : "left" ,
+                          "background": "#ace248",
+                          "style": {
+                            "font": "Avenir-Bold",
+                            "size": "18",
+                            "width": "700",
+                            "color": "#ffffff",
+                            "border": "#ffffff",
+                            "background": "#5ec6ff",
+                            "spacing": "30",
+                            "padding":"5"
+
+
+                          }
                     },
                     {
                       "type": "horizontal",
                       "style":{
-                        "width" : "700"
+                        "width" : "700",
+                        "background":"#aaaaaa"
                       },
                       "components": [
                         {
@@ -282,12 +294,11 @@
                             "gradient":"true"
 
 
-
                           }
                         },
                           {
-                            "type": "label",
-                            "text": "129",
+                            "type": "textfield",
+                            "value": "129",
                             "style": {
                               "font": "Avenir-Bold",
                               "size": "14",
@@ -330,8 +341,8 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "56%",
+                              "type": "textfield",
+                              "value": "56%",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
@@ -369,12 +380,11 @@
                               "gradient":"true"
 
 
-
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "129",
+                              "type": "textfield",
+                              "value": "129",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
@@ -416,8 +426,8 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "37%",
+                              "type": "textfield",
+                              "value": "37%",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
@@ -439,13 +449,15 @@
                     }
 
                   ]
+                }]
                 },
                 {
                   "type": "horizontal",
                   "style": {
                     "align": "fill",
                     "color": "#ffffff",
-                    "padding": "1"
+                    "padding": "1",
+                    "background":"#aaaaaa"
                   },
                   "components": [
                     {"type": "vertical",
@@ -508,8 +520,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "Yes",
+                                  "type": "textfield",
+                                  "value": "Yes",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -552,8 +564,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "No",
+                                  "type": "textfield",
+                                  "value": "No",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -595,8 +607,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "Yes",
+                                  "type": "textfield",
+                                  "value": "Yes",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -638,8 +650,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "3.25 hrs",
+                                  "type": "textfield",
+                                  "value": "3.25 hrs",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -682,8 +694,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "Yes",
+                                  "type": "textfield",
+                                  "value": "Yes",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -726,8 +738,8 @@
                                 }
                               },
                                 {
-                                  "type": "label",
-                                  "text": "No",
+                                  "type": "textfield",
+                                  "value": "No",
                                   "style": {
                                     "font": "Avenir-Bold",
                                     "size": "14",
@@ -785,7 +797,7 @@
                   ]
 
                 }
-
+               
                 ]
             }
           ]

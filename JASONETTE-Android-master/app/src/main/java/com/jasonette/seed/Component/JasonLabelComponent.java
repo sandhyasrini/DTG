@@ -19,14 +19,19 @@ import org.json.JSONObject;
 
 public class JasonLabelComponent {
 
+
     public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) {
         int bgColor;
+        int borderWidth;
+
         if(view == null){
             return new TextView(context);
         } else {
             try {
                 ((TextView)view).setText(component.getString("text"));
                 JasonComponent.build(view, component, parent, context);
+
+                view.setContentDescription("hf_use_text");
 
                 String type;
                 JSONObject style = JasonHelper.style(component, context);
@@ -39,8 +44,16 @@ public class JasonLabelComponent {
                 if(style.has( "background" )){
                     bgColor = JasonHelper.parse_color(style.getString("background"));
                 }
+
                 else {
                     bgColor =  Color.parseColor( "#ffffff" );
+                }
+
+                if(style.has("border_width")){
+                    borderWidth = Integer.parseInt(style.getString("border_width"));
+                }
+                else {
+                    borderWidth= 1;
                 }
                 if(style.has("border")){
 
@@ -49,7 +62,7 @@ public class JasonLabelComponent {
                     gd.setShape(GradientDrawable.RECTANGLE);
                     gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
                     gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
-                    gd.setStroke(1,  color);
+                    gd.setStroke(borderWidth,  color);
                     gd.setBounds(2, 2, 2, 2);
                     view.setBackground(gd);
 

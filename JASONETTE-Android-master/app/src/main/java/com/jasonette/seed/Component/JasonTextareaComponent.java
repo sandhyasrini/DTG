@@ -141,6 +141,10 @@ public class JasonTextareaComponent {
                         ((EditText) view).setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                     }
                 }
+                if(component.has("contentDescription")){
+                    //Log.i("Content Description--->", component.getString("contentDescription"));
+                    ((EditText) view).setContentDescription(component.getString(("contentDescription")));
+                }
 
                 // Data binding
                 if(component.has("name")){

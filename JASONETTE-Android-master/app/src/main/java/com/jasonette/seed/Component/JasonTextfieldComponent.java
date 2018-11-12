@@ -138,6 +138,10 @@ public class JasonTextfieldComponent {
                     }
                 }
 
+                if(component.has("contentDescription")){
+                    //Log.i("Content Description--->", component.getString("contentDescription"));
+                    ((EditText)view).setContentDescription(component.getString("contentDescription"));
+                }
                 // Data binding
                 if(component.has("name")){
                     ((EditText)view).addTextChangedListener(new TextWatcher() {
