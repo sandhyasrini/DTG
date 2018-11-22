@@ -228,7 +228,7 @@ public class JasonImageComponent {
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     );
-                    params.setMargins(0, 20, 0, 0);
+                    params.setMargins(-20, 0, 0, 0);
 
                     ((TextView) view).setLayoutParams(params);
                 }
