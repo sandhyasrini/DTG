@@ -17,8 +17,10 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.Manifest;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -121,6 +123,11 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
     public View focusView = null;
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
     Parcelable listState;
     JSONObject intent_to_resolve;
     public JSONObject agents = new JSONObject();
@@ -137,7 +144,18 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
+//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
+//                == PackageManager.PERMISSION_DENIED)
+//        {
+//            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA} , 1);
+//        }
+
+        int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
 
         loaded = false;
         event_queue = new ArrayList<>();
@@ -1378,6 +1396,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     }
 
     public void render(final JSONObject action, JSONObject data, final JSONObject event, final Context context){
+//        onRefresh();
         JasonViewActivity activity = (JasonViewActivity) context;
         try{
             String template_name = "body";

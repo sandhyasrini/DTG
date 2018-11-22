@@ -77,7 +77,7 @@ public class JasonDropdownComponent {
                         gd.setShape(GradientDrawable.RECTANGLE);
                         gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
                         gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
-                        gd.setStroke(1,  bordercolor);
+                        gd.setStroke(2,  bordercolor);
                         gd.setBounds(2, 2, 2, 2);
                         ((Spinner) view).setBackground(gd);
 

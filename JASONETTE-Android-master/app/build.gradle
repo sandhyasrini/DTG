@@ -4,11 +4,11 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.jasonette"
+        applicationId "com.wipro.dt"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 3
-        versionName "0.1.0"
+        versionCode 4
+        versionName "0.4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

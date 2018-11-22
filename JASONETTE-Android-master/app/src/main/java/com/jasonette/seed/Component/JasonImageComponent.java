@@ -5,13 +5,18 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -44,6 +49,7 @@ public class JasonImageComponent {
                 String str = pref.getString(session_domain, null);
                 session = new JSONObject(str);
             }
+
             // Attach Header from Session
             if(session != null && session.has("header")) {
                 Iterator<?> keys = session.getJSONObject("header").keys();
@@ -62,6 +68,7 @@ public class JasonImageComponent {
                     builder.addHeader(key, val);
                 }
             }
+
             return builder;
 
         } catch (Exception e) {
@@ -77,7 +84,20 @@ public class JasonImageComponent {
                 return "file:///android_asset/file/" + url.substring(7);
             } else if(url.startsWith("data:image")) {
                 return url;
-            } else {
+            }
+            else if (url.contains("local://")) {
+                Log.d( "localFile", "resolve_url: " + context.getExternalFilesDir( Environment.DIRECTORY_PICTURES) + " " + url.substring(8));
+
+                if(url.substring( 8 ).contains( "{{$jason.file_name}}"))
+                {
+                    return "file:///android_asset/file/noimage.jpg";
+                }
+                else{
+                    return context.getExternalFilesDir( Environment.DIRECTORY_PICTURES) + "/"  +url.substring( 8 ) + ".jpg";
+
+                }
+            }
+            else {
                 LazyHeaders.Builder builder = JasonImageComponent.prepare(component, context);
                 return new GlideUrl(url, builder.build());
             }
@@ -111,6 +131,7 @@ public class JasonImageComponent {
                                 RoundedBitmapDrawableFactory.create(context.getResources(), res);
                         bitmapDrawable.setCornerRadius(corner_radius_float);
                         view.setImageDrawable(bitmapDrawable);
+                        new Zoom( context );
                     }
                 });
         } catch (Exception e) {
@@ -122,6 +143,7 @@ public class JasonImageComponent {
         if(new_url.getClass().toString().equalsIgnoreCase("string") && ((String)new_url).startsWith("data:image")){
             String n = (String)new_url;
             String base64;
+
             if(n.startsWith("data:image/jpeg")){
                 base64 = n.substring("data:image/jpeg;base64,".length());
             } else if(n.startsWith("data:image/png")){
@@ -198,6 +220,17 @@ public class JasonImageComponent {
                 final JSONObject style = JasonHelper.style(component, context);
                 if (style.has("corner_radius")) {
                     corner_radius = JasonHelper.pixels(context, style.getString("corner_radius"), "horizontal");
+                }
+                if(style.has( "margin" )){
+                    ((TextView) view).setGravity( Gravity.LEFT);
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+                    params.setMargins(0, 20, 0, 0);
+
+                    ((TextView) view).setLayoutParams(params);
                 }
                 type = component.getString("type");
 
