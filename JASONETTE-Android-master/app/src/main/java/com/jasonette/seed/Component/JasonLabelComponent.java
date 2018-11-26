@@ -23,6 +23,7 @@ public class JasonLabelComponent {
     public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) {
         int bgColor;
         int borderWidth;
+        int cornerWidth;
 
         if(view == null){
             return new TextView(context);
@@ -55,6 +56,13 @@ public class JasonLabelComponent {
                 else {
                     borderWidth= 1;
                 }
+                if(style.has("corner_width")){
+                    cornerWidth = Integer.parseInt( (style.getString( "corner_width" )) );
+
+                }
+                else {
+                    cornerWidth = 0;
+                }
                 if(style.has("border")){
 
                     int color = JasonHelper.parse_color(style.getString("border"));
@@ -63,6 +71,19 @@ public class JasonLabelComponent {
                     gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
                     gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
                     gd.setStroke(borderWidth,  color);
+                    gd.setCornerRadius( cornerWidth );
+                    gd.setBounds(2, 2, 2, 2);
+                    view.setBackground(gd);
+
+
+                }
+                if(style.has("corner_width")){
+
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setShape(GradientDrawable.RECTANGLE);
+                    gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
+                    gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
+                    gd.setCornerRadius( cornerWidth );
                     gd.setBounds(2, 2, 2, 2);
                     view.setBackground(gd);
 

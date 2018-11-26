@@ -154,13 +154,13 @@
                   "components" : [
                     {
                       "type" :"label",
-                      "text" : "Primary Crusher",
+                      "text" : "Grinding Line 1",
                       "align" : "left" ,
                       "background": "#ace248",
                       "style": {
                         "font": "Avenir-Bold",
-                        "size": "16",
-                        "width": "900",
+                        "size": "18",
+                        "width": "700",
                         "color": "#ffffff",
                         "border": "#ffffff",
                         "background": "#5ec6ff",
@@ -173,14 +173,13 @@
                     {
                       "type": "horizontal",
                       "style":{
-                        "width" : "900"
+                        "width" : "830"
                       },
                       "components": [
                         {
 
                           "type":"vertical",
                           "style":{
-                            "border": "#002151",
                             "align" : "center"
                           },
                           "components":[{
@@ -190,7 +189,7 @@
                               "background" : "#023384",
                               "font": "Avenir-Bold",
                               "size": "14",
-                              "width" : "115",
+                              "width" : "110",
                               "align" : "center",
                               "color": "#ffffff",
                               "border": "#111111",
@@ -203,12 +202,12 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "129",
+                              "type": "textfield",
+                              "value": "Yes",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
-                                "width" : "115",
+                                "width" : "110",
                                 "align" : "center",
                                 "color": "#111111",
                                 "border": "#023384",
@@ -224,19 +223,18 @@
                         {
                           "type":"vertical",
                           "style":{
-                            "border": "#002151",
                             "align" : "center"
 
                           },
                           "components":[{
                             "type": "label",
-                            "text": "Balls added",
+                            "text": "Balls Added (%)",
                             "style": {
                               "background" : "#023384",
                               "font": "Avenir-Bold",
                               "size": "14",
                               "color": "#ffffff",
-                              "width" : "115",
+                              "width" : "110",
                               "align" : "center",
                               "gradient":"true",
                               "border": "#111111",
@@ -248,12 +246,12 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "37%",
+                              "type": "textfield",
+                              "value": "37",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
-                                "width" : "115",
+                                "width" : "110",
                                 "align" : "center",
                                 "color": "#111111",
                                 "border": "#023384",
@@ -268,18 +266,17 @@
                         {
                           "type":"vertical",
                           "style":{
-                            "border": "#002151",
                             "align" : "center"
 
                           },
                           "components":[{
                             "type": "label",
-                            "text": "SAG",
+                            "text": "SAG (%)",
                             "style": {
                               "background" : "#023384",
                               "font": "Avenir-Bold",
                               "size": "14",
-                              "width" : "115",
+                              "width" : "110",
                               "gradient":"true",
                               "align" : "center",
                               "color": "#ffffff",
@@ -292,12 +289,12 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "37%",
+                              "type": "textfield",
+                              "value": "37",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
-                                "width" : "115",
+                                "width" : "110",
                                 "align" : "center",
                                 "color": "#111111",
                                 "border": "#023384",
@@ -312,18 +309,17 @@
                         {
                           "type":"vertical",
                           "style":{
-                            "border": "#002151",
                             "align" : "center"
 
                           },
                           "components":[{
                             "type": "label",
-                            "text": "BM : Rec",
+                            "text": "BM: Rec (%)",
                             "style": {
                               "background" : "#023384",
                               "font": "Avenir-Bold",
                               "size": "14",
-                              "width" : "115",
+                              "width" : "110",
                               "gradient":"true",
                               "align" : "center",
                               "color": "#ffffff",
@@ -336,12 +332,56 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "37%",
+                              "type": "textfield",
+                              "value": "37",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
-                                "width" : "115",
+                                "width" : "110",
+                                "align" : "center",
+                                "color": "#111111",
+                                "border": "#023384",
+                                "padding":"5",
+                                "spacing": "5"
+
+
+
+                              }
+                        }
+                      ]
+                    },
+                        {
+                          "type":"vertical",
+                          "style":{
+                            "align" : "center"
+
+                          },
+                          "components":[{
+                            "type": "label",
+                            "text": "Pur: Rec (%)",
+                            "style": {
+                              "background" : "#023384",
+                              "font": "Avenir-Bold",
+                              "size": "14",
+                              "width" : "110",
+                              "align" : "center",
+                              "gradient":"true",
+                              "color": "#ffffff",
+                              "border": "#111111",
+                              "padding":"5",
+                              "spacing": "5"
+
+
+
+                            }
+                          },
+                            {
+                              "type": "textfield",
+                              "value": "37",
+                              "style": {
+                                "font": "Avenir-Bold",
+                                "size": "14",
+                                "width" : "110",
                                 "align" : "center",
                                 "color": "#111111",
                                 "border": "#023384",
@@ -357,63 +397,17 @@
                         {
                           "type":"vertical",
                           "style":{
-                            "border": "#002151",
                             "align" : "center"
 
                           },
                           "components":[{
                             "type": "label",
-                            "text": "Pur: Rec",
+                            "text": "New (%)",
                             "style": {
                               "background" : "#023384",
                               "font": "Avenir-Bold",
                               "size": "14",
-                              "width" : "115",
-                              "align" : "center",
-                              "gradient":"true",
-                              "color": "#ffffff",
-                              "border": "#111111",
-                              "padding":"5",
-                              "spacing": "5"
-
-
-
-                            }
-                          },
-                            {
-                              "type": "label",
-                              "text": "37%",
-                              "style": {
-                                "font": "Avenir-Bold",
-                                "size": "14",
-                                "width" : "115",
-                                "align" : "center",
-                                "color": "#111111",
-                                "border": "#023384",
-                                "padding":"5",
-                                "spacing": "5"
-
-
-
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "type":"vertical",
-                          "style":{
-                            "border": "#002151",
-                            "align" : "center"
-
-                          },
-                          "components":[{
-                            "type": "label",
-                            "text": "New",
-                            "style": {
-                              "background" : "#023384",
-                              "font": "Avenir-Bold",
-                              "size": "14",
-                              "width" : "115",
+                              "width" : "110",
                               "gradient":"true",
                               "align" : "center",
                               "color": "#ffffff",
@@ -426,12 +420,12 @@
                             }
                           },
                             {
-                              "type": "label",
-                              "text": "37%",
+                              "type": "textfield",
+                              "value": "37",
                               "style": {
                                 "font": "Avenir-Bold",
                                 "size": "14",
-                                "width" : "115",
+                                "width" : "110",
                                 "align" : "center",
                                 "color": "#111111",
                                 "border": "#023384",
@@ -444,10 +438,10 @@
                             }
                           ]
                         }
-                      ]
-                    }
-
                   ]
+                }
+
+                  ] 
                 },
                 {
                   "type" : "horizontal",
@@ -596,30 +590,63 @@
                   },
                   "components": [
 
-                            {
-                              "type": "button",
-                              "text": "Next",
-                              "style": {
-                                "width": "100",
-                                "height":"30",
-                                "align":"right",
-                                "background": "#00ff00",
-                                "color": "#ffffff",
-                                "font": "HelveticaNeue",
-                                "size": "14",
-                                "corner_radius": "2"
-                              },
-                              "href": {
-                                "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/home.json",
-                                "view": "jason"
-                              }
+                    {
+                      "type": "button",
+                      "text": "Next",
+                      "style": {
+                        "height": "30",
+                        "align": "fill",
+                        "margin":"left",
+                        "background": "#189e09",
+                        "color": "#ffffff",
+                        "font": "HelveticaNeue",
+                        "size": "14",
+                        "corner_radius": "3",
+                        "padding": "5",
+                        "padding-top": "10",
+                        "spacing": "10",
+                        "margin_top":"10"
 
-                            }
+                      },
+                      "href": {
+                      "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/home.json",
+                "view": "jason"
+                      }
+                    }
 
                   ]
 
                 }
-              
+                //                {
+                //                  "type": "vertical",
+                //                  "style" : {
+                //                    "align" : "fill",
+                //                    "background": "#a1b1cc",
+                //                    "color":"#ffffff",
+                //                    "padding" : "1",
+                //                    "border" :"#ffffff"
+                //
+                //                  },
+                //                  "components" : [
+                //                    {
+                //                      "type": "button",
+                //                      "text": "Tap Me!",
+                //                      "style": {
+                //                        "width": "50",
+                //                        "height": "50",
+                //                        "background": "#00ff00",
+                //                        "color": "#ffffff",
+                //                        "font": "HelveticaNeue",
+                //                        "size": "14"
+                //                      },
+                //                      "href": {
+                //                        "url": "https://raw.githubusercontent.com/Jasonette/Instagram-UI-example/master/home.json",
+                //                        "view": "jason"
+                //                      }
+                //
+                //                    }
+                //                  ]
+                //                }
               ]
             }
           ]

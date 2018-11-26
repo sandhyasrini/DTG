@@ -26,6 +26,8 @@ import java.util.Date;
 
 public class JasonMediaAction {
 
+    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    String fileName = "";
     /**********************************
      *
      * Play
@@ -33,6 +35,7 @@ public class JasonMediaAction {
      **********************************/
 
     public void play(final JSONObject action, JSONObject data, final JSONObject event, final Context context) {
+
         try {
             if(action.has("options")){
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -172,7 +175,7 @@ public class JasonMediaAction {
                 // video
                 VideoRecorderActivity.IntentBuilder builder =new VideoRecorderActivity.IntentBuilder(context)
                         .to(createFile("video", context))
-                        .zoomStyle(ZoomStyle.SEEKBAR)
+                        .zoomStyle(ZoomStyle.NONE)
                         .updateMediaStore()
                         .quality(q);
 
@@ -182,7 +185,7 @@ public class JasonMediaAction {
                 // photo
                 CameraActivity.IntentBuilder builder = new CameraActivity.IntentBuilder(context)
                         .to(createFile("image", context))
-                        .zoomStyle(ZoomStyle.SEEKBAR)
+                        .zoomStyle(ZoomStyle.NONE)
                         .updateMediaStore()
                         .quality(q);
 
@@ -253,6 +256,7 @@ public class JasonMediaAction {
                     ret.put("data", encoded);
                     ret.put("data_uri", data_uri);
                     ret.put("content_type", "image/jpeg");
+                    ret.put("file_name",fileName);
                     JasonHelper.next("success", action, ret, event, context);
                 } catch (Exception e) {
                     Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
@@ -265,18 +269,28 @@ public class JasonMediaAction {
     }
     private File createFile(String type, Context context) throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String fileName = "" + timeStamp + "_";
+
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
         File f;
         if(type.equalsIgnoreCase("image")) {
-            f = File.createTempFile( fileName, ".jpg", storageDir );
+            Log.d("timestamp",timeStamp);
+            f = File.createTempFile( timeStamp, ".jpg", storageDir );
+            Log.d("timestamp",timeStamp);
         } else if(type.equalsIgnoreCase("video")){
-            f = File.createTempFile( fileName, ".mp4", storageDir );
+            f = File.createTempFile( timeStamp, ".mp4", storageDir );
         } else {
-            f = File.createTempFile( fileName, ".txt", storageDir );
+            f = File.createTempFile( timeStamp, ".txt", storageDir );
         }
+        String arr = f.toString();
+        String[] myArr = arr.split( "/" );
+//        myArr = myArr[myArr.length-1].split( "." );
+        String sfileName = myArr[myArr.length-1];
+        String[] myFile = sfileName.split( "\\." );
+        Log.d( "timestamp", "createFile: " + sfileName + " "+ myFile.length);
+        fileName = myFile[0];
+
+
         return f;
     }
 

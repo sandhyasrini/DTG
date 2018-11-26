@@ -2,14 +2,18 @@ package com.jasonette.seed.Component;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jasonette.seed.Helper.JasonHelper;
+import com.jasonette.seed.R;
 
 import org.json.JSONObject;
 
@@ -23,6 +27,8 @@ public class JasonButtonComponent{
 
             view = JasonLabelComponent.build(view, component, parent, context);
             view.setContentDescription("hf_use_text");
+//            view.setBackgroundResource( R.drawable.rounded_corners);
+
 
             try {
                 JSONObject style = component.getJSONObject("style");
@@ -34,7 +40,6 @@ public class JasonButtonComponent{
 
                 // Default is center
                 int g = Gravity.CENTER;
-
                 if(style.has("margin")){
                     ((TextView) view).setGravity(Gravity.LEFT);
 
@@ -42,7 +47,8 @@ public class JasonButtonComponent{
                             LayoutParams.WRAP_CONTENT,
                             LayoutParams.WRAP_CONTENT
                     );
-                    params.setMargins(0, 30, 0, 0);
+                    params.setMargins(0, 20, 0, 0);
+
                     ((TextView) view).setLayoutParams(params);
                 }
 

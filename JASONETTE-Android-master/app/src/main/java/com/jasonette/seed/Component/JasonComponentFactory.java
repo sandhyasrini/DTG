@@ -39,8 +39,11 @@ public class JasonComponentFactory {
             } else if(type.equalsIgnoreCase("slider")) {
                 view = JasonSliderComponent.build(prototype, component, parent, context);
             } else if(type.equalsIgnoreCase("switch")) {
-                view = JasonSwitchComponent.build(prototype, component, parent, context);
+                view = JasonSwitchComponent.build( prototype, component, parent, context );
             }
+                else if(type.equalsIgnoreCase("dropdown")) {
+                    view = JasonDropdownComponent.build(prototype, component, parent, context);
+                }
             else if(type.equalsIgnoreCase("dropdown")) {
                 view = JasonDropdownComponent.build(prototype, component, parent, context);
             }

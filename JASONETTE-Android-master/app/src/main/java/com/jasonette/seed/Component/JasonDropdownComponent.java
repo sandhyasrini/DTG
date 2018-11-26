@@ -25,10 +25,10 @@ public class JasonDropdownComponent {
             try {
                 view = JasonComponent.build(view, component, parent, context);
                 final Spinner sSpinner = ((Spinner) view);
-                    sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
-                    sSpinner.setMinimumWidth(30);
-                    sSpinner.setTextAlignment( View.TEXT_ALIGNMENT_TEXT_START);
-                    sSpinner.setPadding(0,0,0,0);
+                sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
+                sSpinner.setMinimumWidth(30);
+                sSpinner.setTextAlignment( View.TEXT_ALIGNMENT_TEXT_START);
+                sSpinner.setPadding(0,0,0,0);
 
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
@@ -79,7 +79,7 @@ public class JasonDropdownComponent {
                         gd.setShape(GradientDrawable.RECTANGLE);
                         gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
                         gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
-                        gd.setStroke(1,  bordercolor);
+                        gd.setStroke(2,  bordercolor);
                         gd.setBounds(2, 2, 2, 2);
 
 
