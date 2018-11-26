@@ -42,6 +42,8 @@ public class JasonDropdownComponent {
                     final float size;
                     final int padding;
                     final int bgColor;
+                    final int bordercolor;
+                    final GradientDrawable gd;
                     JSONObject style = JasonHelper.style(component, context);
                     if (style.has("color"))
                         color = JasonHelper.parse_color(style.getString("color"));
@@ -72,16 +74,24 @@ public class JasonDropdownComponent {
                     }
                     if(style.has("border")){
 
-                        int bordercolor = JasonHelper.parse_color(style.getString("border"));
-                        GradientDrawable gd = new GradientDrawable();
+                        bordercolor = JasonHelper.parse_color(style.getString("border"));
+                         gd = new GradientDrawable();
                         gd.setShape(GradientDrawable.RECTANGLE);
                         gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
                         gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
                         gd.setStroke(1,  bordercolor);
                         gd.setBounds(2, 2, 2, 2);
-                        ((Spinner) view).setBackground(gd);
 
 
+                    }
+                    else {
+                        bordercolor=0;
+                         gd = new GradientDrawable();
+                        gd.setShape(GradientDrawable.RECTANGLE);
+                        gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
+                        gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
+                        gd.setStroke(1,  bordercolor);
+                        gd.setBounds(2, 2, 2, 2);
                     }
 
 
@@ -110,6 +120,7 @@ public class JasonDropdownComponent {
                                     View v = super.getView(position, convertView, parent);
                                     ((TextView) v).setTextSize(size);
                                     ((TextView) v).setTextColor(color);
+
                                     return v;
                                 }
 
@@ -119,6 +130,7 @@ public class JasonDropdownComponent {
                                     ((TextView) v).setTextColor(color);
                                     ((TextView) v).setCompoundDrawablePadding(padding);
                                     ((TextView) v).setBackgroundColor(bgColor);
+
                                     return v;
                                 }
                             };
