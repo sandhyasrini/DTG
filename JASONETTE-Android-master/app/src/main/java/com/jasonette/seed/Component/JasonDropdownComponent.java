@@ -1,11 +1,14 @@
 package com.jasonette.seed.Component;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,6 +27,11 @@ public class JasonDropdownComponent {
             try {
                 view = JasonComponent.build(view, component, parent, context);
                 final Spinner sSpinner = ((Spinner) view);
+                sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
+                sSpinner.setMinimumWidth(30);
+                sSpinner.setTextAlignment( View.TEXT_ALIGNMENT_TEXT_START);
+                sSpinner.setPadding(0,0,0,0);
+
 
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
@@ -36,16 +44,23 @@ public class JasonDropdownComponent {
                     final int color;
                     final float size;
                     final int padding;
+                    final int bgColor;
                     JSONObject style = JasonHelper.style(component, context);
                     if (style.has("color"))
                         color = JasonHelper.parse_color(style.getString("color"));
                     else
-                        color = 0;
+                        color = Color.parseColor("#111111");
+
+                    if(style.has("background"))
+                        bgColor = JasonHelper.parse_color(style.getString("background"));
+                    else
+                        bgColor = 0;
+
 
                     if (style.has("size"))
                         size = Float.parseFloat(style.getString("size"));
                     else
-                        size = 5;
+                        size = 15;
 
                     if (style.has("padding"))
                         padding = Integer.parseInt(style.getString("padding"));
@@ -57,6 +72,19 @@ public class JasonDropdownComponent {
                     if (component.has("contentDescription")) {
                         Log.i("Content Description--->", component.getString("contentDescription"));
                         ((Spinner) view).setContentDescription(component.getString("contentDescription"));
+                    }
+                    if(style.has("border")){
+
+                        int bordercolor = JasonHelper.parse_color(style.getString("border"));
+                        GradientDrawable gd = new GradientDrawable();
+                        gd.setShape(GradientDrawable.RECTANGLE);
+                        gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
+                        gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
+                        gd.setStroke(2,  bordercolor);
+                        gd.setBounds(2, 2, 2, 2);
+                        ((Spinner) view).setBackground(gd);
+
+
                     }
 
 
@@ -93,11 +121,26 @@ public class JasonDropdownComponent {
                                     ((TextView) v).setTextSize(size);
                                     ((TextView) v).setTextColor(color);
                                     ((TextView) v).setCompoundDrawablePadding(padding);
+                                    ((TextView) v).setBackgroundColor(bgColor);
                                     return v;
                                 }
                             };
 
                             sSpinner.setAdapter(adapter);
+                            if(style.has("height") && style.has("width")){
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Integer.parseInt(style.getString("height"))));
+
+                            }
+                            else if(style.has("height")){
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, Integer.parseInt(style.getString("height"))));
+
+                            }
+
+                            else if(style.has("width")){
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams( Integer.parseInt(style.getString("width")), LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                            }
+
                             sSpinner.setSelection(defaultSelPos);
 
                             sSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -113,10 +156,10 @@ public class JasonDropdownComponent {
                                 }
                             });
 
+
                         } catch (Exception e) {
                             Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
                         }
-
                     }
                 }
                 view.requestLayout();
@@ -127,7 +170,6 @@ public class JasonDropdownComponent {
             }
         }
     }
-
     public static void itemSelected(Spinner view,int i, Context root_context) {
         view.setSelection(i);
         JSONObject component = (JSONObject) view.getTag();
