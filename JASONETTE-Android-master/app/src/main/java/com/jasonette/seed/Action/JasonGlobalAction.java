@@ -88,6 +88,7 @@ public class JasonGlobalAction {
             while (keysIterator.hasNext()) {
                 String key = (String) keysIterator.next();
                 Object val = options.get(key);
+                Log.d( "global", "set: "+ val );
                 editor.putString(key, val.toString());
                 ((Launcher)context.getApplicationContext()).setGlobal(key, val);
             }

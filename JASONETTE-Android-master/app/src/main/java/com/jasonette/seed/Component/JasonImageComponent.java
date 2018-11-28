@@ -86,14 +86,14 @@ public class JasonImageComponent {
                 return url;
             }
             else if (url.contains("local://")) {
-                Log.d( "localFile", "resolve_url: " + context.getExternalFilesDir( Environment.DIRECTORY_PICTURES) + " " + url.substring(8));
+                Log.d( "localFile", "resolve_url: " +   Environment.getExternalStorageDirectory()   + "/DT/Pictures/" + url.substring(8));
 
                 if(url.substring( 8 ).contains( "{{$jason.file_name}}"))
                 {
                     return "file:///android_asset/file/noimage.jpg";
                 }
                 else{
-                    return context.getExternalFilesDir( Environment.DIRECTORY_PICTURES) + "/"  +url.substring( 8 ) + ".jpg";
+                    return Environment.getExternalStorageDirectory()   + "/DT/Pictures/"  +url.substring( 8 ) + ".jpg";
 
                 }
             }
@@ -222,15 +222,12 @@ public class JasonImageComponent {
                     corner_radius = JasonHelper.pixels(context, style.getString("corner_radius"), "horizontal");
                 }
                 if(style.has( "margin" )){
-                    ((TextView) view).setGravity( Gravity.LEFT);
-
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     );
-                    params.setMargins(-20, 0, 0, 0);
-
-                    ((TextView) view).setLayoutParams(params);
+                    params.setMargins(-5, 0, 0, 0);
+                     view.setLayoutParams(params);
                 }
                 type = component.getString("type");
 

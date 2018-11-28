@@ -270,7 +270,7 @@ public class JasonMediaAction {
     private File createFile(String type, Context context) throws IOException {
         // Create an image file name
 
-        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = new File( android.os.Environment.getExternalStorageDirectory() ,"DT/Pictures" );
 
         File f;
         if(type.equalsIgnoreCase("image")) {
@@ -287,7 +287,7 @@ public class JasonMediaAction {
 //        myArr = myArr[myArr.length-1].split( "." );
         String sfileName = myArr[myArr.length-1];
         String[] myFile = sfileName.split( "\\." );
-        Log.d( "timestamp", "createFile: " + sfileName + " "+ myFile.length);
+        Log.d( "timestamp", "createFile: " + sfileName + " "+ myFile[0]);
         fileName = myFile[0];
 
 
