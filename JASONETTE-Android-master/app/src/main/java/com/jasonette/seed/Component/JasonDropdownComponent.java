@@ -6,11 +6,13 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.jasonette.seed.Core.JasonViewActivity;
 import com.jasonette.seed.Helper.JasonHelper;
 
 import org.json.JSONArray;
@@ -29,6 +31,7 @@ public class JasonDropdownComponent {
                 sSpinner.setMinimumWidth(30);
                 sSpinner.setTextAlignment( View.TEXT_ALIGNMENT_TEXT_START);
                 sSpinner.setPadding(0,0,0,0);
+
 
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
@@ -139,11 +142,27 @@ public class JasonDropdownComponent {
                             }
 
                             sSpinner.setSelection(defaultSelPos);
+
+                            sSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                                    itemSelected(sSpinner,i, context);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+                                    //adapterView.setSelection(defaultSelPos);
+                                }
+                            });
+
+
                         } catch (Exception e) {
                             Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
                         }
                     }
                 }
+                view.requestLayout();
                 return view;
             } catch (Exception e) {
                 Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
@@ -151,5 +170,17 @@ public class JasonDropdownComponent {
             }
         }
     }
-
+    public static void itemSelected(Spinner view,int i, Context root_context) {
+        view.setSelection(i);
+        JSONObject component = (JSONObject) view.getTag();
+        try {
+            ((JasonViewActivity) root_context).model.var.put(component.getString("name"), view.getSelectedItem());
+            if (component.has("action")) {
+                JSONObject action = component.getJSONObject("action");
+                ((JasonViewActivity) root_context).call(action.toString(), new JSONObject().toString(), "{}", view.getContext());
+            }
+        } catch (Exception e) {
+            Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
+        }
+    }
 }
