@@ -96,6 +96,7 @@ public class Launcher extends Application {
     public void setGlobal(String key, Object json){
         try {
             this.global.put(key, json);
+            Log.d( "global", "setGlobal: " + key +"  " +  json);
         } catch (Exception e) {
             Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
         }
