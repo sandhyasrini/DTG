@@ -24,6 +24,10 @@ public class JasonSwitchComponent {
                 final Switch aSwitch = ((Switch) view);
 
                 Boolean checked = false;
+//                float scaleX = 10;
+//                float scaleY = 10;
+                float text_size;
+
                 if(component.has("name")){
                     if(((JasonViewActivity) context).model.var.has(component.getString("name"))){
                         checked = ((JasonViewActivity) context).model.var.getBoolean(component.getString("name"));
@@ -33,8 +37,28 @@ public class JasonSwitchComponent {
                         }
                     }
                 }
+
+                if(component.has("text")){
+                    aSwitch.setText(component.getString("text"));
+                }
                 final JSONObject style = JasonHelper.style(component, context);
+
                 aSwitch.setChecked(checked);
+                if(style.has("textsize")){
+                    text_size = Float.parseFloat(style.getString("textsize"));
+                    aSwitch.setTextSize(text_size);
+                }
+
+//                if (style.has("scalex"))
+//                    scaleX = Float.parseFloat (style.getString("scalex"));
+//
+//                if (style.has("scaley"))
+//                    scaleY = Float.parseFloat(style.getString("scaley"));
+//
+//                aSwitch.setScaleX(scaleX);
+//                aSwitch.setScaleY(scaleY);
+
+
                 aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         onChange(aSwitch, isChecked, style, context);
