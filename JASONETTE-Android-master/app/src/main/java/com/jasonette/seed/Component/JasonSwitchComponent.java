@@ -38,8 +38,8 @@ public class JasonSwitchComponent {
                     }
                 }
 
-                if(component.has("text")){
-                    aSwitch.setText(component.getString("text"));
+                if(component.has("switch_text")){
+                    aSwitch.setText(component.getString("switch_text"));
                 }
                 final JSONObject style = JasonHelper.style(component, context);
 
