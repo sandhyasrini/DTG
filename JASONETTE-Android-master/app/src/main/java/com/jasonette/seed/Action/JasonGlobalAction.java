@@ -2,23 +2,37 @@ package com.jasonette.seed.Action;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.jasonette.seed.Helper.JasonHelper;
 import com.jasonette.seed.Launcher.Launcher;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.Iterator;
 
+
 public class JasonGlobalAction {
+
+
+
     public void reset(final JSONObject action, final JSONObject data, final JSONObject event, final Context context) throws IOException {
 
         /********************
@@ -66,6 +80,7 @@ public class JasonGlobalAction {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void set(final JSONObject action, final JSONObject data, final JSONObject event, final Context context) {
 
+        String TAG = "global";
         /********************
 
          The following sets a global variable named "db".
@@ -90,83 +105,83 @@ public class JasonGlobalAction {
 
          ********************/
 
-        try{
-            File jsonFile = new File(Environment.getExternalStorageDirectory()   ,"/DT/file1.txt");
-            Log.d( "global", "file path " + jsonFile);
 
-            if(!jsonFile.exists()) {
-                jsonFile.createNewFile();
-            }
-//            FileWriter file = new FileWriter( jsonFile);
-            JSONObject obj = new JSONObject();
-            obj.put("Name", "crunchify.com");
-            obj.put("Author", "App Shah");
-
-            JSONObject jsonObject = new JSONObject();
-
-            // Add the values to the jsonObject
-            jsonObject.put("Name", "www.javainterviewpoint.com");
-            jsonObject.put("Age", "999");
-
-            // Create a new JSONArray object
-            JSONArray jsonArray = new JSONArray();
-
-            // Add values to the jsonArray
-            jsonArray.put( 0,"India" );
-            jsonArray.put( 1,"China " );
-            jsonArray.put( 2,"Aus" );
-
-
-
-            // Add the jsoArray to jsonObject
-            jsonObject.put("Countries", jsonArray);
-
-
-            // Create a new FileWriter object
-            FileWriter fileWriter = new FileWriter(Environment.getExternalStorageDirectory() + "/DT/file1.txt" );
-            // Writting the jsonObject into sample.json
-            fileWriter.write(jsonObject.toString());
-            fileWriter.close();
-//            file.write( String.valueOf( obj ));
-//            file.close();
-
-        } catch (JSONException e) {
-            Log.d( "global", "jsonerror" +  e.getMessage() );
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.d( "global", "jsonerror" +  e.getMessage() );
-            e.printStackTrace();
-        }
 
         try {
             SharedPreferences pref = context.getSharedPreferences("global", 0);
             SharedPreferences.Editor editor = pref.edit();
 
             JSONObject options = action.getJSONObject("options");
-
             JSONObject jo = new JSONObject();
+            JSONObject jsonObj = new JSONObject();
+
+            //File processing
+            File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
+            FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
+            JsonParser jsonParser = new JsonParser();
+
+            //Putting the contents of JSON file into a JSONObject using JSONParser
+
+
+            //ReaDING FROM file
+//            BufferedReader br = new BufferedReader(new FileReader(myFile));
+//            StringBuilder sb = new StringBuilder();
+//            String line = br.readLine();
+//
+//            while (line != null) {
+//                sb.append( line );
+//                sb.append( "\n" );
+//                line = br.readLine();
+//            }
+
 
             Iterator<String> keysIterator = options.keys();
+            String section_name = (String) options.get("section_id");
+            JSONObject finalObj = new JSONObject(  );
+            JsonArray jsonArray = new JsonArray();
+            JsonObject student2 = new JsonObject();
+            JsonObject student = new JsonObject();
+            Object obj = jsonParser.parse(new FileReader(myFile));
+            if(obj.toString().length() > 0) {
+
+                student = (JsonObject) obj;
+            }
+            Log.d( TAG, "value from json file" + student.get("example") );
+
             while (keysIterator.hasNext()) {
+
                 String key = (String) keysIterator.next();
                 Object val = options.get(key);
-                if(jo.has( key ))
-                {
-                    if(jo.get(key) != "")
-                    {
-                        jo.remove( key );
-                        jo.put( key,val );
-                    }
 
+                if(!key.equals("section_id") ) {
+                    editor.putString( key, val.toString() );
+                    ((Launcher) context.getApplicationContext()).setGlobal( key, val );
+                    student2.addProperty( key,  val.toString() );
                 }
-                else{
-                    jo.put( key,val );
-                }
-                Log.d( "global", "jsonObject" + jo );
-                    Log.d( "global", "set: "+ val );
-                editor.putString(key, val.toString());
-                ((Launcher)context.getApplicationContext()).setGlobal(key, val);
+
             }
+            student.add( section_name ,student2 );
+            FileWriter file = new FileWriter(myFile);
+            file.write(student.toString());
+            file.flush();
+            file.close();
+
+            //Writing to file
+//            MediaScannerConnection.scanFile(context , new String[]{myFile.getAbsolutePath() }, null,
+//                    new MediaScannerConnection.OnScanCompletedListener() {
+//                        public void onScanCompleted(String path, Uri uri) {
+//                            Log.i("ExternalStorage", "Scanned " + path + ":");
+//                            Log.i("ExternalStorage", "-> uri=" + uri);
+//                        }
+//                    });
+//            if(myFile.exists()) {
+//                writer.write( jsonObj.toString() );
+//                writer.flush();// this lines takes whatever is stored in the BufferedWriter's internal buffer
+//                writer.close();
+//            }
+
+
+            Log.d( "global", "jsonObject" + jo  + "myAnswer  "  + " ansother one ---->"  );
             editor.commit();
 
             // Execute next

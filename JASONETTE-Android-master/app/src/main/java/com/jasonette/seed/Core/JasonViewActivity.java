@@ -15,9 +15,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -68,6 +70,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -333,6 +337,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     private void setup_agents() {
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             if (head.has("agents")) {
                 final JSONObject agents = head.getJSONObject("agents");
                 Iterator<String> iterator = agents.keys();
@@ -358,6 +363,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     private void clear_agents() {
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             final JSONObject agents = head.getJSONObject("agents");
             Iterator<String> iterator = agents.keys();
             while (iterator.hasNext()) {
@@ -647,6 +653,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
         loaded = true;
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject events = head.getJSONObject("actions");
             simple_trigger("$show", new JSONObject(), this);
         } catch (Exception e){
@@ -658,6 +665,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
         simple_trigger("$load", new JSONObject(), this);
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject events = head.getJSONObject("actions");
             if(events!=null && events.has("$load")){
                 // nothing
@@ -911,6 +919,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
             }
 
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject events = head.getJSONObject("actions");
             // Look up an action by event_name
             if (events.has(event_name)) {
@@ -1274,6 +1283,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                 // 1. Resolve the action by looking up from $jason.head.actions
                 String event_name = options.getString("name");
                 JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
                 JSONObject events = head.getJSONObject("actions");
                 final Object lambda = events.get(event_name);
 
@@ -1419,6 +1429,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
             }
 
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject templates = head.getJSONObject("templates");
 
             JSONObject template = templates.getJSONObject(template_name);
@@ -1689,6 +1700,22 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
                 if (jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = jason.getJSONObject("$jason").getJSONObject("head");
+                    if(head.has("json_id")){
+                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + head.getString( "json_id" ) + ".json");
+
+                        MediaScannerConnection.scanFile((Launcher)getApplicationContext(), new String[]{jsonFile.getAbsolutePath() }, null,
+                                new MediaScannerConnection.OnScanCompletedListener() {
+                                    public void onScanCompleted(String path, Uri uri) {
+                                        Log.i("ExternalStorage", "Scanned " + path + ":");
+                                        Log.i("ExternalStorage", "-> uri=" + uri);
+                                    }
+                                });
+                        if(!jsonFile.exists()) {
+                            jsonFile.createNewFile();
+                        }
+                    }
+
+
 
                     if (head.has("agents")) {
                         final JSONObject agents = head.getJSONObject("agents");
@@ -1723,12 +1750,17 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                         }
                     }
 
+
+
+
                 }
 
                 onLoad();
 
             } catch (JSONException e) {
                 Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
@@ -2036,6 +2068,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                     swipeLayout.setEnabled(false);
                     if(model.jason != null && model.jason.has("$jason") && model.jason.getJSONObject("$jason").has("head")){
                         final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
                         if(head.has("actions") && head.getJSONObject("actions").has("$pull")) {
                             // Setup refresh listener which triggers new data loading
                             swipeLayout.setEnabled(true);
@@ -2051,6 +2084,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                                 }
                             });
                         }
+
                     }
 
 
