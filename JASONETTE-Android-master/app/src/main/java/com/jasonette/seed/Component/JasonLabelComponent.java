@@ -13,8 +13,12 @@ import android.graphics.drawable.shapes.RectShape;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.jasonette.seed.Helper.JasonHelper;
+import com.jasonette.seed.R;
+
 import org.json.JSONObject;
 
 public class JasonLabelComponent {
@@ -77,6 +81,7 @@ public class JasonLabelComponent {
 
 
                 }
+
                 if(style.has("corner_width")){
 
                     GradientDrawable gd = new GradientDrawable();

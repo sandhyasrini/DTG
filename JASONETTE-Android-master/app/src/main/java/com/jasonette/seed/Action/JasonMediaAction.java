@@ -133,7 +133,7 @@ public class JasonMediaAction {
 
         try {
 
-            AbstractCameraActivity.Quality q = AbstractCameraActivity.Quality.LOW;
+            AbstractCameraActivity.Quality q = AbstractCameraActivity.Quality.HIGH;
             String type = "photo";
             Boolean edit = false;
 

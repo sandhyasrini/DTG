@@ -86,6 +86,7 @@ public class JasonImageComponent {
                 return url;
             }
             else if (url.contains("local://")) {
+
                 Log.d( "localFile", "resolve_url: " + context.getExternalFilesDir( Environment.DIRECTORY_PICTURES) + " " + url.substring(8));
 
                 if(url.substring( 8 ).contains( "{{$jason.file_name}}"))
