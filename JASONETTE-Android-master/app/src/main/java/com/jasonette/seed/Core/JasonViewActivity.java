@@ -1701,6 +1701,11 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                 if (jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = jason.getJSONObject("$jason").getJSONObject("head");
                     if(head.has("json_id")){
+
+                        File folder = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/");
+                        if(!folder.exists()) {
+                            folder.mkdirs();
+                        }
                         File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + head.getString( "json_id" ) + ".json");
 
                         MediaScannerConnection.scanFile((Launcher)getApplicationContext(), new String[]{jsonFile.getAbsolutePath() }, null,

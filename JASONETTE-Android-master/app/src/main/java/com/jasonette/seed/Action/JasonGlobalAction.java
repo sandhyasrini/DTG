@@ -141,9 +141,12 @@ public class JasonGlobalAction {
             JsonArray jsonArray = new JsonArray();
             JsonObject student2 = new JsonObject();
             JsonObject student = new JsonObject();
-            Object obj = jsonParser.parse(new FileReader(myFile));
-            if(obj.toString().length() > 0) {
+            JsonElement obj = jsonParser.parse(new FileReader(myFile));
+            Log.d(TAG, "set: object " + obj);
+            if(obj.isJsonNull()) {
 
+            }
+            else {
                 student = (JsonObject) obj;
             }
             Log.d( TAG, "value from json file" + student.get("example") );
