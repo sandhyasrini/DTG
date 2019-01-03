@@ -3,7 +3,10 @@ package com.jasonette.seed.Component;
 import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -12,11 +15,20 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.jasonette.seed.Helper.JasonHelper;
+import com.jasonette.seed.Launcher.Launcher;
 import com.jasonette.seed.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.Timestamp;
 
 public class JasonButtonComponent{
     public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) throws JSONException {
@@ -34,11 +46,44 @@ public class JasonButtonComponent{
 
             try {
 
-                if(component.has("save"))
-                {
-                    if(component.has("filename"))
-                    {
-                        
+                if(component.has("save")) {
+                    if (component.getString("save").equalsIgnoreCase("true")) {
+                        if (component.has("filename")) {
+                            File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
+                            FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
+                            JsonParser jsonParser = new JsonParser();
+                            JsonObject student ;
+                            String filename = component.getString("filename");
+                            File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
+
+                            MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
+                                    new MediaScannerConnection.OnScanCompletedListener() {
+                                        public void onScanCompleted(String path, Uri uri) {
+                                            Log.i("ExternalStorage", "Scanned " + path + ":");
+                                            Log.i("ExternalStorage", "-> uri=" + uri);
+                                        }
+                                    });
+                            if(!jsonFile.exists()) {
+                                jsonFile.createNewFile();
+                            }
+
+                            JsonElement obj = jsonParser.parse(new FileReader(myFile));
+                            if(obj.isJsonNull()) {
+
+                            }
+                            else {
+                                student = (JsonObject) obj;
+                                Log.d("button", "build: " + student);
+                                FileWriter file = new FileWriter(jsonFile);
+                                file.write(String.valueOf(student));
+
+                            }
+                            if(myFile.delete())
+                            {
+                                Log.d("button", "build: deleted");
+                            }
+
+                        }
                     }
                 }
 

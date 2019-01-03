@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.sql.Timestamp;
 import java.util.Iterator;
 
 
@@ -68,6 +69,47 @@ public class JasonGlobalAction {
                 }
                 editor.commit();
             }
+            if(options.has("save"))
+            {
+                if (options.getString("save").equalsIgnoreCase("true")) {
+                    if (options.has("filename")) {
+                        File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
+                        FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
+                        JsonParser jsonParser = new JsonParser();
+                        JsonObject student ;
+                        String filename = options.getString("filename");
+                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
+
+                        MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
+                                new MediaScannerConnection.OnScanCompletedListener() {
+                                    public void onScanCompleted(String path, Uri uri) {
+                                        Log.i("ExternalStorage", "Scanned " + path + ":");
+                                        Log.i("ExternalStorage", "-> uri=" + uri);
+                                    }
+                                });
+                        if(!jsonFile.exists()) {
+                            jsonFile.createNewFile();
+                        }
+
+                        JsonElement obj = jsonParser.parse(new FileReader(myFile));
+                        if(obj.isJsonNull()) {
+
+                        }
+                        else {
+                            student = (JsonObject) obj;
+                            Log.d("button", "build: " + student);
+                            FileWriter file = new FileWriter(jsonFile);
+                            file.write(String.valueOf(student));
+
+                        }
+                        if(myFile.delete())
+                        {
+                            Log.d("button", "build: deleted");
+                        }
+
+                    }
+                }
+            }
 
             // Execute next
             JasonHelper.next("success", action, ((Launcher)context.getApplicationContext()).getGlobal(), event, context);
@@ -77,6 +119,8 @@ public class JasonGlobalAction {
         }
 
     }
+
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void set(final JSONObject action, final JSONObject data, final JSONObject event, final Context context) {
 
