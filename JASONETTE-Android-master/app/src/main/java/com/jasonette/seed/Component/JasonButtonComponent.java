@@ -47,44 +47,44 @@ public class JasonButtonComponent{
             try {
 
                 if(component.has("save")) {
-                    if (component.getString("save").equalsIgnoreCase("true")) {
-                        if (component.has("filename")) {
-                            File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
-                            FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
-                            JsonParser jsonParser = new JsonParser();
-                            JsonObject student ;
-                            String filename = component.getString("filename");
-                            File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
-
-                            MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
-                                    new MediaScannerConnection.OnScanCompletedListener() {
-                                        public void onScanCompleted(String path, Uri uri) {
-                                            Log.i("ExternalStorage", "Scanned " + path + ":");
-                                            Log.i("ExternalStorage", "-> uri=" + uri);
-                                        }
-                                    });
-                            if(!jsonFile.exists()) {
-                                jsonFile.createNewFile();
-                            }
-
-                            JsonElement obj = jsonParser.parse(new FileReader(myFile));
-                            if(obj.isJsonNull()) {
-
-                            }
-                            else {
-                                student = (JsonObject) obj;
-                                Log.d("button", "build: " + student);
-                                FileWriter file = new FileWriter(jsonFile);
-                                file.write(String.valueOf(student));
-
-                            }
-                            if(myFile.delete())
-                            {
-                                Log.d("button", "build: deleted");
-                            }
-
-                        }
-                    }
+//                    if (component.getString("save").equalsIgnoreCase("true")) {
+//                        if (component.has("filename")) {
+//                            File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
+//                            FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
+//                            JsonParser jsonParser = new JsonParser();
+//                            JsonObject student ;
+//                            String filename = component.getString("filename");
+//                            File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
+//
+//                            MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
+//                                    new MediaScannerConnection.OnScanCompletedListener() {
+//                                        public void onScanCompleted(String path, Uri uri) {
+//                                            Log.i("ExternalStorage", "Scanned " + path + ":");
+//                                            Log.i("ExternalStorage", "-> uri=" + uri);
+//                                        }
+//                                    });
+//                            if(!jsonFile.exists()) {
+//                                jsonFile.createNewFile();
+//                            }
+//
+//                            JsonElement obj = jsonParser.parse(new FileReader(myFile));
+//                            if(obj.isJsonNull()) {
+//
+//                            }
+//                            else {
+//                                student = (JsonObject) obj;
+//                                Log.d("button", "build: " + student);
+//                                FileWriter file = new FileWriter(jsonFile);
+//                                file.write(String.valueOf(student));
+//
+//                            }
+//                            if(myFile.delete())
+//                            {
+//                                Log.d("button", "build: deleted");
+//                            }
+//
+//                        }
+//                    }
                 }
 
                 JSONObject style = component.getJSONObject("style");
