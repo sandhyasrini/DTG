@@ -72,14 +72,16 @@ public class JasonGlobalAction {
             if(options.has("save"))
             {
                 if (options.getString("save").equalsIgnoreCase("true")) {
+
                     if (options.has("filename")) {
                         File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
-                        FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
+                        String timestamp = String.valueOf(new Timestamp(System.currentTimeMillis()));
+                        timestamp = timestamp.replace(" " , "_");
                         JsonParser jsonParser = new JsonParser();
                         JsonObject student ;
                         String filename = options.getString("filename");
-                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
-
+                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + timestamp + ".json");
+                        FileWriter writer  = new FileWriter(jsonFile.getAbsoluteFile() , true);
                         MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
                                 new MediaScannerConnection.OnScanCompletedListener() {
                                     public void onScanCompleted(String path, Uri uri) {
@@ -92,20 +94,24 @@ public class JasonGlobalAction {
                         }
 
                         JsonElement obj = jsonParser.parse(new FileReader(myFile));
+                        if(myFile.delete())
+                        {
+                            Log.d("button", "build: deleted");
+                        }
                         if(obj.isJsonNull()) {
 
                         }
                         else {
                             student = (JsonObject) obj;
                             Log.d("button", "build: " + student);
-                            FileWriter file = new FileWriter(jsonFile);
-                            file.write(String.valueOf(student));
+                            String content = student.toString();
+//                            FileWriter file = new FileWriter(jsonFile);
+                            writer.write(content);
+                            writer.flush();
+                            writer.close();
 
                         }
-                        if(myFile.delete())
-                        {
-                            Log.d("button", "build: deleted");
-                        }
+
 
                     }
                 }
