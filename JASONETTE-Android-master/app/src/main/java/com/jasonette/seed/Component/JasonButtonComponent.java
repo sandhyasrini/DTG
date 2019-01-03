@@ -15,14 +15,16 @@ import android.widget.TextView;
 import com.jasonette.seed.Helper.JasonHelper;
 import com.jasonette.seed.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JasonButtonComponent{
-    public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) {
+    public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) throws JSONException {
         if(component.has("url")){
             // image button
             view = JasonImageComponent.build(view, component, parent, context);
-        } else if(component.has("text")){
+        }
+        else if(component.has("text")){
             // label button
 
             view = JasonLabelComponent.build(view, component, parent, context);
@@ -31,6 +33,15 @@ public class JasonButtonComponent{
 
 
             try {
+
+                if(component.has("save"))
+                {
+                    if(component.has("filename"))
+                    {
+                        
+                    }
+                }
+
                 JSONObject style = component.getJSONObject("style");
 
 
@@ -142,6 +153,7 @@ public class JasonButtonComponent{
                     padding_right = 15;
                 }
 
+
                 view.setPadding(padding_left, padding_top, padding_right, padding_bottom);
             } catch (Exception e) {
                 Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
@@ -156,7 +168,6 @@ public class JasonButtonComponent{
             }
         }
         JasonComponent.addListener(view, context);
-
         return view;
     }
 }
