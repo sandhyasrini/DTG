@@ -42,6 +42,7 @@ public class Launcher extends Application {
     public JSONObject services;
     private static Context currentContext;
 
+
     public void call(String serviceName, String methodName, JSONObject action, Context context) {
         try {
             Object service = services.get(serviceName);
@@ -95,7 +96,9 @@ public class Launcher extends Application {
     }
     public void setGlobal(String key, Object json){
         try {
+
             this.global.put(key, json);
+            Log.d( "global", "setGlobal:***************************** " + key +"  " +  json);
         } catch (Exception e) {
             Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
         }
@@ -165,6 +168,7 @@ public class Launcher extends Application {
                         Object json = new JSONTokener(val).nextValue();
                         if (json instanceof JSONObject) {
                             this.global.put(entry.getKey(), new JSONObject(val));
+                            Log.d( "global", "onCreate:$$$$$$$$$$$$$$$ " + entry.getKey() + " $$$$$$$$$"+ val );
                         } else if (json instanceof JSONArray) {
                             this.global.put(entry.getKey(), new JSONArray(val));
                         }

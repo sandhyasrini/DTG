@@ -6,11 +6,13 @@ import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.jasonette.seed.Core.JasonViewActivity;
 import com.jasonette.seed.Helper.JasonHelper;
 
 import org.json.JSONArray;
@@ -27,8 +29,9 @@ public class JasonDropdownComponent {
                 final Spinner sSpinner = ((Spinner) view);
                 sSpinner.setBackgroundColor(Color.parseColor("#ffffff"));
                 sSpinner.setMinimumWidth(30);
-                sSpinner.setTextAlignment( View.TEXT_ALIGNMENT_TEXT_START);
-                sSpinner.setPadding(0,0,0,0);
+                sSpinner.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                sSpinner.setPadding(0, 0, 0, 0);
+
 
                 if (component.has("name")) {
                     Log.i("Name--->", component.getString("name"));
@@ -42,15 +45,15 @@ public class JasonDropdownComponent {
                     final float size;
                     final int padding;
                     final int bgColor;
-                    final int bordercolor;
-                    final GradientDrawable gd;
+                    int bordercolor;
+                    GradientDrawable gd;
                     JSONObject style = JasonHelper.style(component, context);
                     if (style.has("color"))
                         color = JasonHelper.parse_color(style.getString("color"));
                     else
                         color = Color.parseColor("#111111");
 
-                    if(style.has("background"))
+                    if (style.has("background"))
                         bgColor = JasonHelper.parse_color(style.getString("background"));
                     else
                         bgColor = 0;
@@ -72,17 +75,31 @@ public class JasonDropdownComponent {
                         Log.i("Content Description--->", component.getString("contentDescription"));
                         ((Spinner) view).setContentDescription(component.getString("contentDescription"));
                     }
-                    if(style.has("border")){
+                    if (style.has("border")) {
 
                         bordercolor = JasonHelper.parse_color(style.getString("border"));
                          gd = new GradientDrawable();
                         gd.setShape(GradientDrawable.RECTANGLE);
-                        gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
-                        gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
-                        gd.setStroke(2,  bordercolor);
+                        gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+                        gd.setColor(bgColor); // Changes this drawbale to use a single color instead of a gradient
+                        gd.setStroke(2, bordercolor);
                         gd.setBounds(2, 2, 2, 2);
 
+                        ((Spinner) view).setBackground(gd);
+                    }
 
+                    int defaultSelPos = 0;
+                    boolean isDefaultVal = true;
+
+                    if (component.has("value")) {
+                        Log.i("Value--->", component.getString("value"));
+                        try {
+                            isDefaultVal = false;
+                            defaultSelPos = Integer.parseInt(component.getString("value"));
+                        } catch (NumberFormatException e) {
+                            isDefaultVal = true;
+                            Log.e("Error", component.getString("value") + "is not a valid integer number.");
+                        }
                     }
                     else {
                         bordercolor=0;
@@ -94,12 +111,10 @@ public class JasonDropdownComponent {
                         gd.setBounds(2, 2, 2, 2);
                     }
 
-
                     //Create spinner (Dropdown) and map dropdown values.
                     if (component.has("options")) {
                         JSONArray arrOfOptions = component.getJSONArray("options");
                         items = new String[arrOfOptions.length()];
-                        int defaultSelPos = 0;
                         for (int i = 0; i < arrOfOptions.length(); i++) {
                             JSONObject optionObj = arrOfOptions.getJSONObject(i);
                             //Log.i("Dropdown option--->" + i, optionObj.getString("value"));
@@ -109,10 +124,14 @@ public class JasonDropdownComponent {
                                 //Log.i("defaultSelected -->", optionObj.getString("defaultSelected"));
                                 if (optionObj.getString("defaultSelected").trim().equals("true")) {
                                     // Log.i("defaultSelected True", optionObj.getString("defaultSelected"));
-                                    defaultSelPos = i;
+                                    //Set default value only if there is no value for value property.
+                                    if (isDefaultVal) {
+                                        defaultSelPos = i;
+                                    }
                                 }
                             }
                         }
+
 
                         try {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items) {
@@ -136,26 +155,38 @@ public class JasonDropdownComponent {
                             };
 
                             sSpinner.setAdapter(adapter);
-                            if(style.has("height") && style.has("width")){
+                            if (style.has("height") && style.has("width")) {
                                 sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Integer.parseInt(style.getString("height"))));
 
-                            }
-                            else if(style.has("height")){
+                            } else if (style.has("height")) {
                                 sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, Integer.parseInt(style.getString("height"))));
 
-                            }
-
-                            else if(style.has("width")){
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams( Integer.parseInt(style.getString("width")), LinearLayout.LayoutParams.WRAP_CONTENT));
+                            } else if (style.has("width")) {
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(Integer.parseInt(style.getString("width")), LinearLayout.LayoutParams.WRAP_CONTENT));
 
                             }
 
                             sSpinner.setSelection(defaultSelPos);
+
+                            sSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    itemSelected(sSpinner, i, context);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+                                    //adapterView.setSelection(defaultSelPos);
+                                }
+                            });
+
+
                         } catch (Exception e) {
                             Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
                         }
                     }
                 }
+                view.requestLayout();
                 return view;
             } catch (Exception e) {
                 Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
@@ -164,4 +195,52 @@ public class JasonDropdownComponent {
         }
     }
 
+    public static void itemSelected(Spinner view, int i, Context root_context) {
+        view.setSelection(i);
+        JSONObject component = (JSONObject) view.getTag();
+        try {
+            ((JasonViewActivity) root_context).model.var.put(component.getString("name"), view.getSelectedItemId());
+            if (component.has("action")) {
+                JSONObject action = component.getJSONObject("action");
+                ((JasonViewActivity) root_context).call(action.toString(), new JSONObject().toString(), "{}", view.getContext());
+            }
+        } catch (Exception e) {
+            Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
+        }
+    }
 }
+
+//------------------------Sample Dropdown JSON object-------------------------------
+//  {
+//          "type":"dropdown",
+//          "name":"shift",
+//          "value":"{{$global.dropdownval}}",
+//          "contentDescription":"shift",
+//          "options":[
+//          {
+//          "value":"Value 1",
+//          "defaultSelected":"false"
+//          },
+//          {
+//          "value":"Value 2",
+//          "defaultSelected":"false"
+//          },
+//          {
+//          "value":"Value 3",
+//          "defaultSelected":"true"
+//          }
+//          ],
+//          "style":{
+//          "size":"20",
+//          "color":"rgb(200,130,0)",
+//          "padding":"5"
+//          },
+//          "action":{
+//          "type":"$util.toast",
+//          "options":{
+//          "text":"{{$global.dropdownval}}",
+//          "type":"warning"
+//          }
+//          }
+//  }
+

@@ -1,5 +1,6 @@
 package com.jasonette.seed.Core;
 
+import android.Manifest;
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,13 +15,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.Manifest;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +38,6 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
@@ -45,6 +45,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.bumptech.glide.Glide;
@@ -56,12 +57,12 @@ import com.jasonette.seed.Component.JasonComponentFactory;
 import com.jasonette.seed.Component.JasonImageComponent;
 import com.jasonette.seed.Helper.JasonHelper;
 import com.jasonette.seed.Launcher.Launcher;
-import com.jasonette.seed.Service.agent.JasonAgentService;
-import com.jasonette.seed.Service.vision.JasonVisionService;
 import com.jasonette.seed.Lib.JasonToolbar;
 import com.jasonette.seed.Lib.MaterialBadgeTextView;
 import com.jasonette.seed.R;
 import com.jasonette.seed.Section.ItemAdapter;
+import com.jasonette.seed.Service.agent.JasonAgentService;
+import com.jasonette.seed.Service.vision.JasonVisionService;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.json.JSONArray;
@@ -69,6 +70,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -126,7 +129,8 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     Parcelable listState;
     JSONObject intent_to_resolve;
@@ -333,6 +337,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     private void setup_agents() {
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             if (head.has("agents")) {
                 final JSONObject agents = head.getJSONObject("agents");
                 Iterator<String> iterator = agents.keys();
@@ -358,6 +363,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     private void clear_agents() {
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             final JSONObject agents = head.getJSONObject("agents");
             Iterator<String> iterator = agents.keys();
             while (iterator.hasNext()) {
@@ -647,6 +653,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
         loaded = true;
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject events = head.getJSONObject("actions");
             simple_trigger("$show", new JSONObject(), this);
         } catch (Exception e){
@@ -658,6 +665,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
         simple_trigger("$load", new JSONObject(), this);
         try {
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject events = head.getJSONObject("actions");
             if(events!=null && events.has("$load")){
                 // nothing
@@ -911,6 +919,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
             }
 
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject events = head.getJSONObject("actions");
             // Look up an action by event_name
             if (events.has(event_name)) {
@@ -1274,6 +1283,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                 // 1. Resolve the action by looking up from $jason.head.actions
                 String event_name = options.getString("name");
                 JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
                 JSONObject events = head.getJSONObject("actions");
                 final Object lambda = events.get(event_name);
 
@@ -1419,6 +1429,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
             }
 
             JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
             JSONObject templates = head.getJSONObject("templates");
 
             JSONObject template = templates.getJSONObject(template_name);
@@ -1689,6 +1700,22 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
                 if (jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = jason.getJSONObject("$jason").getJSONObject("head");
+                    if(head.has("json_id")){
+                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + head.getString( "json_id" ) + ".json");
+
+                        MediaScannerConnection.scanFile((Launcher)getApplicationContext(), new String[]{jsonFile.getAbsolutePath() }, null,
+                                new MediaScannerConnection.OnScanCompletedListener() {
+                                    public void onScanCompleted(String path, Uri uri) {
+                                        Log.i("ExternalStorage", "Scanned " + path + ":");
+                                        Log.i("ExternalStorage", "-> uri=" + uri);
+                                    }
+                                });
+                        if(!jsonFile.exists()) {
+                            jsonFile.createNewFile();
+                        }
+                    }
+
+
 
                     if (head.has("agents")) {
                         final JSONObject agents = head.getJSONObject("agents");
@@ -1723,12 +1750,17 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                         }
                     }
 
+
+
+
                 }
 
                 onLoad();
 
             } catch (JSONException e) {
                 Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
@@ -2036,6 +2068,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                     swipeLayout.setEnabled(false);
                     if(model.jason != null && model.jason.has("$jason") && model.jason.getJSONObject("$jason").has("head")){
                         final JSONObject head = model.jason.getJSONObject("$jason").getJSONObject("head");
+
                         if(head.has("actions") && head.getJSONObject("actions").has("$pull")) {
                             // Setup refresh listener which triggers new data loading
                             swipeLayout.setEnabled(true);
@@ -2051,6 +2084,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                                 }
                             });
                         }
+
                     }
 
 
