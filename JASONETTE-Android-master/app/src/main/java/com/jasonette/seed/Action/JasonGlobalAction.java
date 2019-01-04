@@ -99,7 +99,7 @@ public class JasonGlobalAction {
                             Log.d("button", "build: deleted");
                         }
                         if(obj.isJsonNull()) {
-
+                            jsonFile.delete();
                         }
                         else {
                             student = (JsonObject) obj;
@@ -187,19 +187,21 @@ public class JasonGlobalAction {
 
             Iterator<String> keysIterator = options.keys();
             String section_name = (String) options.get("section_id");
-            JSONObject finalObj = new JSONObject(  );
-            JsonArray jsonArray = new JsonArray();
-            JsonObject student2 = new JsonObject();
+
+            JsonObject jsonArray = new JsonObject();
             JsonObject student = new JsonObject();
             JsonElement obj = jsonParser.parse(new FileReader(myFile));
-            Log.d(TAG, "set: object " + obj);
             if(obj.isJsonNull()) {
 
             }
             else {
                 student = (JsonObject) obj;
+                if(student.has(section_name))
+                {
+                    jsonArray = student.getAsJsonObject(section_name);
+                }
             }
-            Log.d( TAG, "value from json file" + student.get("example") );
+            Log.d( TAG, "value from json file" + jsonArray  + " and the section id is " );
 
             while (keysIterator.hasNext()) {
 
@@ -209,32 +211,18 @@ public class JasonGlobalAction {
                 if(!key.equals("section_id") ) {
                     editor.putString( key, val.toString() );
                     ((Launcher) context.getApplicationContext()).setGlobal( key, val );
-                    student2.addProperty( key,  val.toString() );
+                    jsonArray.addProperty( key,  val.toString() );
                 }
 
             }
-            student.add( section_name ,student2 );
+            student.add( section_name ,jsonArray );
             FileWriter file = new FileWriter(myFile);
             file.write(student.toString());
             file.flush();
             file.close();
 
-            //Writing to file
-//            MediaScannerConnection.scanFile(context , new String[]{myFile.getAbsolutePath() }, null,
-//                    new MediaScannerConnection.OnScanCompletedListener() {
-//                        public void onScanCompleted(String path, Uri uri) {
-//                            Log.i("ExternalStorage", "Scanned " + path + ":");
-//                            Log.i("ExternalStorage", "-> uri=" + uri);
-//                        }
-//                    });
-//            if(myFile.exists()) {
-//                writer.write( jsonObj.toString() );
-//                writer.flush();// this lines takes whatever is stored in the BufferedWriter's internal buffer
-//                writer.close();
-//            }
 
 
-            Log.d( "global", "jsonObject" + jo  + "myAnswer  "  + " ansother one ---->"  );
             editor.commit();
 
             // Execute next
