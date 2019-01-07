@@ -45,8 +45,6 @@ public class JasonDropdownComponent {
                     final float size;
                     final int padding;
                     final int bgColor;
-                    int bordercolor;
-                    GradientDrawable gd;
                     JSONObject style = JasonHelper.style(component, context);
                     if (style.has("color"))
                         color = JasonHelper.parse_color(style.getString("color"));
@@ -77,38 +75,39 @@ public class JasonDropdownComponent {
                     }
                     if (style.has("border")) {
 
-                        bordercolor = JasonHelper.parse_color(style.getString("border"));
-                         gd = new GradientDrawable();
+                        int bordercolor = JasonHelper.parse_color(style.getString("border"));
+                        GradientDrawable gd = new GradientDrawable();
                         gd.setShape(GradientDrawable.RECTANGLE);
                         gd.setGradientType(GradientDrawable.LINEAR_GRADIENT);
                         gd.setColor(bgColor); // Changes this drawbale to use a single color instead of a gradient
                         gd.setStroke(2, bordercolor);
                         gd.setBounds(2, 2, 2, 2);
-
                         ((Spinner) view).setBackground(gd);
                     }
 
                     int defaultSelPos = 0;
                     boolean isDefaultVal = true;
+                    String selectedItem;
+
 
                     if (component.has("value")) {
                         Log.i("Value--->", component.getString("value"));
                         try {
                             isDefaultVal = false;
-                            defaultSelPos = Integer.parseInt(component.getString("value"));
+                            //defaultSelPos = Integer.parseInt(component.getString("value"));
+                            JSONArray arrOfElements = component.getJSONArray("options");
+                            for (int i = 0; i < arrOfElements.length(); i++) {
+                                JSONObject optionObj = arrOfElements.getJSONObject(i);
+                                if(optionObj.getString("value").trim().equals(component.getString("value").trim()))
+                                {
+                                    defaultSelPos = i;
+                                    break;
+                                }
+                            }
                         } catch (NumberFormatException e) {
                             isDefaultVal = true;
                             Log.e("Error", component.getString("value") + "is not a valid integer number.");
                         }
-                    }
-                    else {
-                        bordercolor=0;
-                         gd = new GradientDrawable();
-                        gd.setShape(GradientDrawable.RECTANGLE);
-                        gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
-                        gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
-                        gd.setStroke(1,  bordercolor);
-                        gd.setBounds(2, 2, 2, 2);
                     }
 
                     //Create spinner (Dropdown) and map dropdown values.
@@ -139,7 +138,6 @@ public class JasonDropdownComponent {
                                     View v = super.getView(position, convertView, parent);
                                     ((TextView) v).setTextSize(size);
                                     ((TextView) v).setTextColor(color);
-
                                     return v;
                                 }
 
@@ -149,7 +147,6 @@ public class JasonDropdownComponent {
                                     ((TextView) v).setTextColor(color);
                                     ((TextView) v).setCompoundDrawablePadding(padding);
                                     ((TextView) v).setBackgroundColor(bgColor);
-
                                     return v;
                                 }
                             };
@@ -199,7 +196,7 @@ public class JasonDropdownComponent {
         view.setSelection(i);
         JSONObject component = (JSONObject) view.getTag();
         try {
-            ((JasonViewActivity) root_context).model.var.put(component.getString("name"), view.getSelectedItemId());
+            ((JasonViewActivity) root_context).model.var.put(component.getString("name"), view.getSelectedItem());
             if (component.has("action")) {
                 JSONObject action = component.getJSONObject("action");
                 ((JasonViewActivity) root_context).call(action.toString(), new JSONObject().toString(), "{}", view.getContext());

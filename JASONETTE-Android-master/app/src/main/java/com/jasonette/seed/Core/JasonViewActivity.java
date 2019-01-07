@@ -126,7 +126,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
     public View focusView = null;
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static final int REQUEST_EXTERNAL_STORAGE = -1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -155,6 +155,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 //        {
 //            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.CAMERA} , 1);
 //        }
+
 
         int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (permission != PackageManager.PERMISSION_GRANTED) {
