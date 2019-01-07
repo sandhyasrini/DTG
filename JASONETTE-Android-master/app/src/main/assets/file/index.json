@@ -36,7 +36,8 @@
                       "style": {
                         "size": "20",
                         "color": "rgb(200,130,0)",
-                        "width":"10%"
+                        "width":"10%",
+                        "border":"#111111"
 
                       },
                       "action": {

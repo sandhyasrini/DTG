@@ -153,13 +153,19 @@ public class JasonDropdownComponent {
 
                             sSpinner.setAdapter(adapter);
                             if (style.has("height") && style.has("width")) {
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, Integer.parseInt(style.getString("height"))));
+                                int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
+
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
 
                             } else if (style.has("height")) {
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, Integer.parseInt(style.getString("height"))));
+                                int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
+
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height));
 
                             } else if (style.has("width")) {
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(Integer.parseInt(style.getString("width")), LinearLayout.LayoutParams.WRAP_CONTENT));
+                              int  width = (int) JasonHelper.pixels(context, style.getString("width"), "horizontal");
+
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT));
 
                             }
 
@@ -179,7 +185,7 @@ public class JasonDropdownComponent {
 
 
                         } catch (Exception e) {
-                            Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
+                            Log.d("dropdown", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
                         }
                     }
                 }

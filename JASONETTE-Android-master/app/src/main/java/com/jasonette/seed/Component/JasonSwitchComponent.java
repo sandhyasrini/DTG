@@ -36,7 +36,15 @@ public class JasonSwitchComponent {
                             checked = component.getBoolean("value");
                         }
                     }
+
+                    //Setting content description. realwear uses this as voice tag
+                    if (component.has("contentDescription")) {
+                        Log.i("Content Description--->", component.getString("contentDescription"));
+                        ((Switch) view).setContentDescription(component.getString("contentDescription"));
+                    }
                 }
+
+
 
                 if(component.has("switch_text")){
                     aSwitch.setText(component.getString("switch_text"));
