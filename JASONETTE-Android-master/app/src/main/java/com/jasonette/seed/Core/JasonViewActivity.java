@@ -158,9 +158,8 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
 
         int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-        }
+        if (permission != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions( this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE );
 
         loaded = false;
         event_queue = new ArrayList<>();
@@ -1013,7 +1012,6 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
                 JSONObject options = new JSONObject();
                 options.put("title", "Not implemented");
-                String type = action.getString("type");
                 options.put("description", action.getString("type") + " is not implemented yet.");
 
                 alert_action.put("options", options);
@@ -1324,19 +1322,31 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
     }
 
     public void require(final JSONObject action, JSONObject data, final JSONObject event, final Context context){
-        /*
+        //
 
-         {
-            "type": "$require",
-            "options": {
-                "items": ["https://...", "https://...", ....],
-                "item": "https://...."
-            }
-         }
+        //
 
-         Crawl all the items in the array and assign it to the key
+        //{
 
-         */
+        //"type": "$require",
+
+        //"options": {
+
+        //"items": ["https://...", "https://...", ....],
+
+        //"item": "https://...."
+
+        //}
+
+        //}
+
+        //
+
+        //Crawl all the items in the array and assign it to the key
+
+        //
+
+        //
 
         try {
             if (action.has("options")) {
