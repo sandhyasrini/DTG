@@ -1,804 +1,116 @@
 {
   "$jason": {
     "head": {
-
-      "data": {
-        "members": [
-          { "name": "Homer" },
-          { "name": "Marge" },
-          { "name": "Lisa" },
-          { "name": "Bart" },
-          { "name": "Maggie" }
-        ]
+      "actions": {
+        "$show": {
+          "type": "$render"
+        }
       },
       "templates": {
-
         "body": {
-          "header": {
-            "title": {
-              "type": "label",
-              "text": "Process Plant Supervisor's Log",
-              "style": {
-                "align": "left",
-                "background" :"#9e8421"
-              }
-            },
-            "style": {
-              "background" :"#d3b023",
-              "color" : "#ffffff",
-              "font" : "Avenir-Bold",
-              "padding" : "5"
-            }
-          },
-          "style":{
-          
-            "background":"#aaaaaa"
-          },
-
           "sections": [
-
             {
-              "style": {
-                "color" : "#ffffff"
-              },
-
               "items": [
-
                 {
-                  "type": "horizontal",
-                  "style": {
-                    "background": "#aaaaaa",
-                    "spacing": "5",
-                    "color" : "#ffffff"
-                  },
+                  "type": "vertical",
                   "components": [
-                {
-                  "type": "textfield",
-                  "name": "date",
-                  "value":"11/12/2018",
-                  "style": {
-                    "placeholder_color": "#cecece",
-                    "font": "HelveticaNeue",
-                    "width": "160",
-                    "height": "37",
-                    "size": "14",
-                    "align" : "center",
-                    "background": "#ffffff",
-                    "padding": "10",
-                    "border":"#000000"
+                    {
+                      "type": "dropdown",
+                      "name": "shift",
+                      "value" : "{{$global.dropdownval}}",
+                      "contentDescription": "shift",
+                      "options": [
+                        {
+                          "value": "Value 1",
+                          "defaultSelected": "false"
+                        },
+                        {
+                          "value": "Value 2",
+                          "defaultSelected": "false"
+                        },
+                        {
+                          "value": "Value 3",
+                          "defaultSelected": "true"
+                        }
+                      ],
+                      "style": {
+                        "size": "20",
+                        "color": "rgb(200,130,0)",
+                        "width":"10%",
+                        "border":"#111111"
 
-                  }
-                },
-                {
-                  "type": "textfield",
-                  "name": "shift",
-                  "value":"Day Shift",
-                  "style": {
-                    "placeholder_color": "#cecece",
-                    "font": "HelveticaNeue",
-                    "width": "160",
-                    "height": "37",
-                    "align" : "center",
-                    "size": "14",
-                    "background": "#ffffff",
-                    "padding": "10",
-                    "color":"#000000",
-                    "border":"#000000"
-                  }
-                },
-                {
-                  "type": "textfield",
-                  "name": "password",
-                  "value":"* J. Pronovost",
-                  "style": {
-                    "placeholder_color": "#cecece",
-                    "font": "HelveticaNeue",
-                    "width": "160",
-                    "height": "37",
-                    "size": "14",
-                    "align" : "center",
-                    "background": "#ffffff",
-                    "padding": "10",
-                    "color":"#000000",
-                    "border":"#000000"
-
-
-
-
-                  }
-                },
-                {
-                  "type": "label",
-                  "text": "Signed",
-                  "style": {
-                    "font": "Avenir-Bold",
-                    "size": "16",
-                    "color": "#ffffff",
-                    "align": "center"
-
-                  }
-                },
+                      },
+                      "action": {
+                        "type": "$util.toast",
+                        "options": {
+                          "text": "{{$get.shift}}",
+                          "type": "warning"
+                        }
+                      }
+                    },
                     {
                       "type": "textfield",
-                      "name": "password",
-                        "value": "Jean Pronovost",
+                      "name": "txtfield",
+                      "placeholder": "Enter Text",
                       "style": {
                         "placeholder_color": "#cecece",
                         "font": "HelveticaNeue",
-                        "width": "180",
-                        "height": "37",
-                        "size": "14",
-                        "align" : "center",
-                        "background": "#ffffff",
-                        "padding": "10",
-                        "color":"#000000",
-                        "border":"#000000"
-
-
-
-
+                        "align": "center",
+                        "width": "200",
+                        "height": "60",
+                        "size": "12"
                       }
-                    }
-                ]
-                },
-                {
-                  "type" : "horizontal",
-                  "style" : {
-                    "align" : "fill",
-                    "background": "#51ff21",
-                    "color":"#ffffff",
-                    "height": "40",
-                    "padding" : "10",
-                    "align" : "center"
-                  },
-                  "components" : [
-                    {
-                      "type" :"label",
-                      "text" : "Safety",
-                      "align" : "left" ,
-                      "background": "#ace248",
-                      "style": {
-                        "font": "Avenir-Bold-Bold",
-                        "size": "18",
-                        "color": "#ffffff",
-                        "height": "40",
-                        "padding" : "10"
-
-                      }
-                    }
-                  ]
-                },
-                {
-                  "type" : "horizontal",
-                  "style" : {
-                    "align" : "fill",
-                    "background": "#0a0a08",
-                    "color":"#ffffff"
-
-                  },
-                  "style" : {
-                    "align" : "fill",
-                    "background": "#0a0a08",
-                    "color":"#ffffff",
-                    "height": "40",
-                    "padding" : "10",
-                    "align" : "center"
-                  },
-                  "components" : [
-                    {
-                      "type" :"label",
-                      "text" : "Incidents / Accidents /IROCS /Safety Positives / Safety Notifications",
-                      "align" : "left",
-                      "style": {
-                        "font": "Avenir-Bold",
-                        "size": "18",
-                        "color": "#ffffff",
-                        "height": "40"
-
-                      }
-                    }
-                  ]
-                },
-
-                {
-                  "type" : "vertical",
-                  "style" : {
-                    "align" : "fill",
-                    "border_color":"#111111",
-                    "border_width":"2",
-                    "padding" : "10",
-                    "border":"#111111"
-                    
-
-                  },
-                  "components" : [
-                    {
-                      "type" :"label",
-                      "text" : "Incidents/ Accidents - Nil \n Primary Air Compressor Inspection and restart procedure training completed Crew 100",
-                      "align" : "left" ,
-                      "background": "#ace248",
-                      "style": {
-                        "font": "Avenir",
-                        "size": "14",
-                        "color":"#000000"
-
-
-                      }
-                    }
-
-                  ]
-                },
-                {
-                  "type" : "vertical",
-                  "style": {
-                    "align": "fill",
-                    "color": "#ffffff",
-                    "padding": "1",
-                    "background":"#aaaaaa"
-                  },
-                  "components": [
-                    {"type": "vertical",
-                      "style" : {
-                        "align" : "fill",
-                        "color":"#ffffff",
-                        "padding" : "1",
-                        "spacing": "5"
-
-
-                      },
-                      "components":[
-                        {
-                          "type" :"label",
-                          "text" : "Primary Crusher",
-                          "align" : "left" ,
-                          "background": "#ace248",
-                          "style": {
-                            "font": "Avenir-Bold",
-                            "size": "18",
-                            "width": "700",
-                            "color": "#ffffff",
-                            "border": "#ffffff",
-                            "background": "#5ec6ff",
-                            "spacing": "30",
-                            "padding":"5"
-
-
-                          }
                     },
                     {
-                      "type": "horizontal",
+                      "type": "switch",
+                      "name": "light",
+                      "value": "true",
+                      "switch_text" :"1",
                       "style":{
-                        "width" : "700",
-                        "background":"#aaaaaa"
+                        "textsize":"10",
+                        "scalex" : "5",
+                        "scaley":"5"
                       },
-                      "components": [
-                        {
-
-                        "type":"vertical",
-                          "style":{
-                            "align" : "center"
-                          },
-                        "components":[{
-                          "type": "label",
-                          "text": "Shift Tonnage",
-                          "style": {
-                            "background" : "#023384",
-                            "font": "Avenir-Bold",
-                            "size": "14",
-                            "width" : "165",
-                            "align" : "center",
-                            "color": "#ffffff",
-                            "border": "#111111",
-                            "padding":"5",
-                            "spacing": "5",
-                            "gradient":"true"
-
-
-                          }
-                        },
-                          {
-                            "type": "textfield",
-                            "value": "129",
-                            "style": {
-                              "font": "Avenir-Bold",
-                              "size": "14",
-                              "width" : "165",
-                              "align" : "center",
-                              "color": "#111111",
-                              "border": "#023384",
-                              "border-width": "2",
-                              "padding":"5",
-                              "spacing": "5"
-
-
-
-                            }
-                          }]
-                        },
-                        {
-                          "type":"vertical",
-                          "style":{
-                            "align" : "center"
-
-                          },
-                          "components":[{
-                            "type": "label",
-                            "text": "Mantle Position",
-                            "style": {
-                              "background" : "#023384",
-                              "font": "Avenir-Bold",
-                              "size": "14",
-                              "color": "#ffffff",
-                              "width" : "165",
-                              "align" : "center",
-                              "border": "#111111",
-                              "padding":"5",
-                              "spacing": "5",
-                              "gradient":"true"
-
-
-
-                            }
-                          },
-                            {
-                              "type": "textfield",
-                              "value": "56%",
-                              "style": {
-                                "font": "Avenir-Bold",
-                                "size": "14",
-                                "width" : "165",
-                                "align" : "center",
-                                "color": "#111111",
-                                "border": "#023384",
-                                "padding":"5",
-                                "spacing": "5"
-
-
-
-                              }
-                            }]
-                        },
-                        {
-                          "type":"vertical",
-                          "style":{
-                            "align" : "center"
-
-                          },
-                          "components":[{
-                            "type": "label",
-                            "text": "Crusher Gap",
-                            "style": {
-                              "background" : "#023384",
-                              "font": "Avenir-Bold",
-                              "size": "14",
-                              "width" : "165",
-                              "align" : "center",
-                              "color": "#ffffff",
-                              "border": "#111111",
-                              "padding":"5",
-                              "spacing": "5",
-                              "gradient":"true"
-
-
-                            }
-                          },
-                            {
-                              "type": "textfield",
-                              "value": "129",
-                              "style": {
-                                "font": "Avenir-Bold",
-                                "size": "14",
-                                "width" : "165",
-                                "align" : "center",
-                                "color": "#111111",
-                                "border": "#023384",
-                                "padding":"5",
-                                "spacing": "5"
-
-
-
-                              }
-                            }]
-                        },
-                        {
-                          "type":"vertical",
-                          "style":{
-                            "align" : "center"
-
-                          },
-                          "components":[{
-                            "type": "label",
-                            "text": "Dome Level",
-                            "style": {
-                              "background" : "#023384",
-                              "font": "Avenir-Bold",
-                              "size": "14",
-                              "width" : "165",
-                              "align" : "center",
-                              "color": "#ffffff",
-                              "border": "#111111",
-                              "padding":"5",
-                              "gradient":"true",
-                              "spacing": "5"
-
-
-
-                            }
-                          },
-                            {
-                              "type": "textfield",
-                              "value": "37%",
-                              "style": {
-                                "font": "Avenir-Bold",
-                                "size": "14",
-                                "width" : "165",
-                                "align" : "center",
-                                "color": "#111111",
-                                "border": "#023384",
-                                "padding":"5",
-                                "spacing": "5"
-
-
-
-                              }
-                            }]
+                      "action": {
+                        "trigger": "banner",
+                        "options": {
+                          "item": "Light is On?"
                         }
-
-
-                      ]
+                      }
                     }
-
                   ]
-                }]
                 },
                 {
                   "type": "horizontal",
-                  "style": {
-                    "align": "fill",
-                    "color": "#ffffff",
-                    "padding": "1",
-                    "background":"#aaaaaa"
-                  },
                   "components": [
-                    {"type": "vertical",
-                      "style" : {
-                        "align" : "fill",
-                        "color":"#ffffff",
-                        "padding" : "1",
-                        "spacing": "5"
-
-
-                      },
-                      "components":[
-                        {
-                          "type" :"label",
-                          "text" : "Crusher Downtime",
-                          "align" : "left" ,
-                          "background": "#ace248",
-                          "style": {
-                            "font": "Avenir-Bold",
-                            "size": "18",
-                            "width": "700",
-                            "color": "#ffffff",
-                            "border": "#ffffff",
-                            "background": "#5ec6ff",
-                            "spacing": "30",
-                            "padding":"5"
-
-
-                          }
-                        },
-                        {
-                          "type": "horizontal",
-                          "style":{
-                            "width" : "700"
-                          },
-                          "components": [
-                            {
-
-                              "type":"vertical",
-                              "style":{
-                                "align" : "center"
-                              },
-                              "components":[{
-                                "type": "label",
-                                "text": "WFO",
-                                "style": {
-                                  "background" : "#023384",
-                                  "font": "Avenir-Bold",
-                                  "size": "14",
-                                  "width" : "110",
-                                  "align" : "center",
-                                  "color": "#ffffff",
-                                  "border": "#111111",
-                                  "padding":"5",
-                                  "gradient":"true",
-                                  "spacing": "5"
-
-
-
-                                }
-                              },
-                                {
-                                  "type": "textfield",
-                                  "value": "Yes",
-                                  "style": {
-                                    "font": "Avenir-Bold",
-                                    "size": "14",
-                                    "width" : "110",
-                                    "align" : "center",
-                                    "color": "#111111",
-                                    "border": "#023384",
-
-                                    "padding":"5",
-                                    "spacing": "5"
-
-
-
-                                  }
-                                }]
-                            },
-                            {
-                              "type":"vertical",
-                              "style":{
-                                "align" : "center"
-
-                              },
-                              "components":[{
-                                "type": "label",
-                                "text": "Capacity",
-                                "style": {
-                                  "background" : "#023384",
-                                  "font": "Avenir-Bold",
-                                  "size": "14",
-                                  "color": "#ffffff",
-                                  "width" : "110",
-                                  "align" : "center",
-                                  "gradient":"true",
-                                  "border": "#111111",
-                                  "padding":"5",
-                                  "spacing": "5"
-
-
-
-                                }
-                              },
-                                {
-                                  "type": "textfield",
-                                  "value": "No",
-                                  "style": {
-                                    "font": "Avenir-Bold",
-                                    "size": "14",
-                                    "width" : "110",
-                                    "align" : "center",
-                                    "color": "#111111",
-                                    "border": "#023384",
-                                    "padding":"5",
-                                    "spacing": "5"
-
-
-
-                                  }
-                                }]
-                            },
-                            {
-                              "type":"vertical",
-                              "style":{
-                                "align" : "center"
-
-                              },
-                              "components":[{
-                                "type": "label",
-                                "text": "Bridging",
-                                "style": {
-                                  "background" : "#023384",
-                                  "font": "Avenir-Bold",
-                                  "size": "14",
-                                  "width" : "110",
-                                  "gradient":"true",
-                                  "align" : "center",
-                                  "color": "#ffffff",
-                                  "border": "#111111",
-                                  "padding":"5",
-                                  "spacing": "5"
-
-
-
-                                }
-                              },
-                                {
-                                  "type": "textfield",
-                                  "value": "Yes",
-                                  "style": {
-                                    "font": "Avenir-Bold",
-                                    "size": "14",
-                                    "width" : "110",
-                                    "align" : "center",
-                                    "color": "#111111",
-                                    "border": "#023384",
-                                    "padding":"5",
-                                    "spacing": "5"
-
-
-
-                                  }
-                                }]
-                            },
-                            {
-                              "type":"vertical",
-                              "style":{
-                                "align" : "center"
-
-                              },
-                              "components":[{
-                                "type": "label",
-                                "text": "Ops DnT",
-                                "style": {
-                                  "background" : "#023384",
-                                  "font": "Avenir-Bold",
-                                  "size": "14",
-                                  "width" : "110",
-                                  "gradient":"true",
-                                  "align" : "center",
-                                  "color": "#ffffff",
-                                  "border": "#111111",
-                                  "padding":"5",
-                                  "spacing": "5"
-
-
-
-                                }
-                              },
-                                {
-                                  "type": "textfield",
-                                  "value": "3.25 hrs",
-                                  "style": {
-                                    "font": "Avenir-Bold",
-                                    "size": "14",
-                                    "width" : "110",
-                                    "align" : "center",
-                                    "color": "#111111",
-                                    "border": "#023384",
-                                    "padding":"5",
-                                    "spacing": "5"
-
-
-
-                                  }
-                            }
-                          ]
-                        },
-                            {
-                              "type":"vertical",
-                              "style":{
-                                "align" : "center"
-
-                              },
-                              "components":[{
-                                "type": "label",
-                                "text": "Mech",
-                                "style": {
-                                  "background" : "#023384",
-                                  "font": "Avenir-Bold",
-                                  "size": "14",
-                                  "width" : "110",
-                                  "align" : "center",
-                                  "gradient":"true",
-                                  "color": "#ffffff",
-                                  "border": "#111111",
-                                  "padding":"5",
-                                  "spacing": "5"
-
-
-
-                                }
-                              },
-                                {
-                                  "type": "textfield",
-                                  "value": "Yes",
-                                  "style": {
-                                    "font": "Avenir-Bold",
-                                    "size": "14",
-                                    "width" : "110",
-                                    "align" : "center",
-                                    "color": "#111111",
-                                    "border": "#023384",
-                                    "padding":"5",
-                                    "spacing": "5"
-
-
-
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "type":"vertical",
-                              "style":{
-                                "align" : "center"
-
-                              },
-                              "components":[{
-                                "type": "label",
-                                "text": "Elect",
-                                "style": {
-                                  "background" : "#023384",
-                                  "font": "Avenir-Bold",
-                                  "size": "14",
-                                  "width" : "110",
-                                  "gradient":"true",
-                                  "align" : "center",
-                                  "color": "#ffffff",
-                                  "border": "#111111",
-                                  "padding":"5",
-                                  "spacing": "5"
-
-
-
-                                }
-                              },
-                                {
-                                  "type": "textfield",
-                                  "value": "No",
-                                  "style": {
-                                    "font": "Avenir-Bold",
-                                    "size": "14",
-                                    "width" : "110",
-                                    "align" : "center",
-                                    "color": "#111111",
-                                    "border": "#023384",
-                                    "padding":"5",
-                                    "spacing": "5"
-
-
-
-                                  }
-                                }
-                              ]
-                            }
-                      ]
-                    }
-                        ]
-                    },
                     {
-                      "type":"vertical",
-                      "style":{
-                        "width":"80",
-                        "align":"left"
+                      "type": "button",
+                      "text": "Click",
+                      "style": {
+                        "width": "50",
+                        "height": "50",
+                        "background": "#00ff00",
+                        "color": "#ffffff",
+                        "font": "HelveticaNeue",
+                        "size": "12"
                       },
-                      "components":[
-                        {
-                          "type": "button",
-                          "text": "Next",
-                          "style": {
-                            "height": "30",
-                            "align": "fill",
-                            "margin":"left",
-                            "background": "#189e09",
-                            "color": "#ffffff",
-                            "font": "HelveticaNeue",
-                            "size": "14",
-                            "corner_radius": "3",
-                            "padding": "5",
-                            "padding-top": "10",
-                            "spacing": "10",
-                            "margin_top":"10"
-
-                          },
-                          "href": {
-                            "url": "https://sandhyasrini.github.io/json/GrindingLine.json",
-                            "view": "jason"
+                      "action": {
+                        "type": "$global.set",
+                        "options": {
+                          "dropdownval": "{{$get.shift}}",
+                          "textbox": "{{$get.txtfield}}"
+                        },
+                        "success": {
+                          "type": "$href",
+                          "options": {
+                            "url": "file://pageTwo.json"
                           }
                         }
-                      ]
-
+                      }
                     }
-
                   ]
-
                 }
-               
-                ]
+              ]
             }
           ]
         }
