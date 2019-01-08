@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 import com.jasonette.seed.Core.JasonViewActivity;
 import com.jasonette.seed.Helper.JasonHelper;
+import com.jasonette.seed.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class JasonDropdownComponent {
     public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) {
-
         if (view == null) {
             return new Spinner(context);
         } else {
@@ -151,6 +151,7 @@ public class JasonDropdownComponent {
                                 }
                             };
 
+//                            adapter.setDropDownViewResource(R.layout.custom);
                             sSpinner.setAdapter(adapter);
                             if (style.has("height") && style.has("width")) {
                                 int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");

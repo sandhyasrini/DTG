@@ -15,6 +15,10 @@
         "center_align": {
           "align": "center"
         },
+        "right_padding":{
+          "padding_left":"-2",
+          "padding_right":"2"
+        },
         "black_color": {
           "color": "rgb(0,0,0)"
         },
@@ -27,17 +31,27 @@
         },
         "header_2_styles": {
           "size": 13,
-          "width": "14%",
-          "height": "6%",
+          "width": "20%",
+          "height": "5%",
           "color": "rgb(0, 0, 0)",
-          "border": "rgb(0, 0, 0)"
+          "border": "rgb(0, 0, 0)",
+          "align": "center"
         },
         "header_2_label": {
           "size": 13,
-          "width": "19%",
+          "width": "25%",
           "color": "rgb(0,162,224)",
           "align": "right"
         },
+        "dropdown_date_style":
+          {
+            "size": "13",
+            "color": "rgb(0, 0, 0)",
+            "border": "rgb(0, 0, 0)",
+            "width":"7%",
+            "height": "5%",
+            "align": "center"
+          },
         "header_2_labels_styles": {
           "size": 13,
           "width": "25%",
@@ -307,52 +321,48 @@
           "sections": [
             {
               "type": "horizontal",
+              "style":
+              {
+                "padding":"0"
+              },
               "items": [
                 {
-                  "type": "horizontal",
-                  "class": "center_align",
-                  "style": {
-                    "size": 13,
-                    "height": "6%"
-                  },
-                  "components": [
-                    {
+
+
                       "type": "label",
-                      "text": "Date.▼",
+                      "text": "Date",
                       "style": {
-                        "width": "8%",
-                        "height": "6%",
+                        "width": "9%",
+                        "height": "7%",
                         "color": "rgb(0,162,224)"
                       }
                     },
                     {
                       "type": "label",
-                      "text": "Month.▼",
+                      "text": "Month",
                       "style": {
-                        "width": "8%",
-                        "height": "6%",
+                        "width": "9%",
+                        "height": "7%",
                         "color": "rgb(0,162,224)"
                       }
                     },
                     {
                       "type": "label",
-                      "text": "Year.▼",
+                      "text": "Year",
                       "style": {
-                        "width": "8%",
-                        "height": "6%",
+                        "width": "9%",
+                        "height": "7%",
                         "color": "rgb(0,162,224)"
                       }
-                    }
-                  ]
                 },
                 {
                   "type": "label",
-                  "text": "Shift.▼",
+                  "text": "Shift",
                   "class": "header_2_labels_styles"
                 },
                 {
                   "type": "label",
-                  "text": "Operator.▼",
+                  "text": "Operator",
                   "class": "header_2_labels_styles"
                 },
                 {
@@ -378,7 +388,7 @@
                       "name": "date",
                       "value": "{{$global.date23}}",
                       "contentDescription": "date",
-                      "class": "header_2_styles center_align",
+                      "class": "dropdown_date_style center_align",
 
                       "options": [
                         {
@@ -390,11 +400,7 @@
                           "defaultSelected": "false"
                         }
                       ],
-                      "style": {
-                        "size": "13",
-                        "color": "rgb(0, 0, 0)",
-                        "border": "rgb(0, 0, 0)"
-                      },
+
                       "action": {
                         "type": "$util.toast",
                         "options": {
@@ -404,10 +410,14 @@
                       }
                     },
                     {
+                      "type": "label",
+                      "text": "▼"
+                    },
+                    {
                       "type": "dropdown",
                       "name": "month",
                       "contentDescription": "month",
-                      "class": "header_2_styles center_align",
+                      "class": "dropdown_date_style center_align",
                       "action": {
                         "type": "$util.alert",
                         "options": {
@@ -415,8 +425,7 @@
                           "description": "{{$get.month}}"
                         }
                       },
-                      "style": {
-                      },
+
                       "options": [
                         {
                           "value": "1",
@@ -469,10 +478,14 @@
                       ]
                     },
                     {
+                      "type": "label",
+                      "text": "▼"
+                    },
+                    {
                       "type": "dropdown",
                       "name": "year",
                       "contentDescription": "year",
-                      "class": "header_2_styles center_align",
+                      "class": "dropdown_date_style center_align",
                       "action": {
                         "type": "$util.alert",
                         "options": {
@@ -480,8 +493,7 @@
                           "description": "{{$get.year}}"
                         }
                       },
-                      "style": {
-                      },
+
                       "options": [
                         {
                           "value": "2019",
@@ -512,6 +524,11 @@
                           "defaultSelected": "false"
                         }
                       ]
+                    },
+                    {
+                      "type": "label",
+                      "text": "▼"
+
                     }
                   ]
                 },
@@ -547,6 +564,11 @@
                 },
                 {
                   "type": "label",
+                  "text": "▼",
+                  "class":"right_padding"
+                },
+                {
+                  "type": "label",
                   "text": "",
                   "class": "black_color",
                   "style": {
@@ -557,6 +579,9 @@
                   "name": "operator",
                   "contentDescription": "operator",
                   "class": "header_2_styles center_align black_color",
+                  "style":{
+                    "padding":"5"
+                  },
                   "options": [
                     {
                       "value": "Operator-1",
@@ -574,6 +599,11 @@
                       "operator": "{{$get.operator}}"
                     }
                   }
+                },
+                {
+                  "type": "label",
+                  "text": "▼",
+                  "class": "right_padding"
                 },
                 {
                   "type": "label",
