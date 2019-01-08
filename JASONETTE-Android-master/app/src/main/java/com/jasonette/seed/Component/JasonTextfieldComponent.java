@@ -19,6 +19,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jasonette.seed.Action.JasonVisionAction;
@@ -56,6 +57,23 @@ public class JasonTextfieldComponent {
                     } else {
                         ((EditText)view).setGravity(Gravity.LEFT);
                     }
+                }
+                if (style.has("height") && style.has("width")) {
+                    int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
+                    int  width = (int) JasonHelper.pixels(context, style.getString("width"), "horizontal");
+
+                    ((EditText)view).setLayoutParams(new LinearLayout.LayoutParams(width, height));
+
+                } else if (style.has("height")) {
+                    int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
+
+                    ((EditText)view).setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, height));
+
+                } else if (style.has("width")) {
+                    int  width = (int) JasonHelper.pixels(context, style.getString("width"), "horizontal");
+
+                    ((EditText)view).setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT));
+
                 }
 
                 if (style.has("size")) {

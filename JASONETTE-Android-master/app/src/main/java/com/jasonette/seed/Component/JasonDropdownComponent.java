@@ -154,8 +154,9 @@ public class JasonDropdownComponent {
                             sSpinner.setAdapter(adapter);
                             if (style.has("height") && style.has("width")) {
                                 int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
+                                int  width = (int) JasonHelper.pixels(context, style.getString("width"), "horizontal");
 
-                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
+                                sSpinner.setLayoutParams(new LinearLayout.LayoutParams(width, height));
 
                             } else if (style.has("height")) {
                                 int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
