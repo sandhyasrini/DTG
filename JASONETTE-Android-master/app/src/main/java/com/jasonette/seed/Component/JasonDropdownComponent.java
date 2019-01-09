@@ -31,6 +31,7 @@ public class JasonDropdownComponent {
                 sSpinner.setMinimumWidth(30);
                 sSpinner.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
                 sSpinner.setPadding(0, 0, 0, 0);
+                sSpinner.setBackgroundResource( R.drawable.bg );
 
 
                 if (component.has("name")) {
@@ -149,7 +150,7 @@ public class JasonDropdownComponent {
                                     ((TextView) v).setBackgroundColor(bgColor);
                                     return v;
                                 }
-                            };
+                        };
 
 //                            adapter.setDropDownViewResource(R.layout.custom);
                             sSpinner.setAdapter(adapter);
