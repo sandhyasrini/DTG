@@ -24,6 +24,7 @@ public class JasonSwitchComponent {
                 final Switch aSwitch = ((Switch) view);
 
                 Boolean checked = false;
+                Boolean isClickable = true;
 //                float scaleX = 10;
 //                float scaleY = 10;
                 float text_size;
@@ -44,14 +45,20 @@ public class JasonSwitchComponent {
                     }
                 }
 
-
-
                 if(component.has("switch_text")){
                     aSwitch.setText(component.getString("switch_text"));
                 }
+
+                //Custom field- TO make Switch readonly if isClickable id false.
+                if(component.has("isClickable")){
+                    isClickable = component.getBoolean("isClickable");
+                }
+
                 final JSONObject style = JasonHelper.style(component, context);
 
                 aSwitch.setChecked(checked);
+                aSwitch.setClickable(isClickable);
+
                 if(style.has("textsize")){
                     text_size = Float.parseFloat(style.getString("textsize"));
                     aSwitch.setTextSize(text_size);
@@ -127,3 +134,20 @@ public class JasonSwitchComponent {
         }
     }
 }
+
+
+//Sample JSON object:
+//
+//  {
+//          "type": "switch",
+//          "name": "light",
+//          "value": "false",
+//          "isClickable" : "true",
+//          "action": {
+//          "type": "$util.toast",
+//          "options": {
+//          "text" :"{{$get.light}}",
+//          "type": "warning"
+//                }
+//          }
+//  }
