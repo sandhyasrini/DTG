@@ -365,6 +365,7 @@ public class JasonModel{
                 state.put("$global", ((Launcher)(this.view.getApplicationContext())).getGlobal());
                 state.put("$env", ((Launcher)(this.view.getApplicationContext())).getEnv());
                 state.put("$params", params);
+                Log.d( "state", "state value" + state.getString( "$global" ));
             } catch (Exception e) {
                 Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
             }

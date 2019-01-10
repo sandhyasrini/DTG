@@ -33,7 +33,10 @@ public class JasonSwitchComponent {
                         checked = ((JasonViewActivity) context).model.var.getBoolean(component.getString("name"));
                     } else {
                         if(component.has("value")){
-                            checked = component.getBoolean("value");
+                            String name = component.getString( "value" );
+                            Log.d( "mytag", "build:1111111111111111111111111111111111111111111 " + checked );
+//                            checked = component.getBoolean("value");
+                            checked = Boolean.valueOf( name );
                         }
                     }
 
@@ -76,7 +79,7 @@ public class JasonSwitchComponent {
                 view.requestLayout();
                 return view;
             } catch (Exception e){
-                Log.d("Warning", e.getStackTrace()[0].getMethodName() + " : " + e.toString());
+                Log.d("Warning", "222222222222222222222222222222222222222222222222222222$$$$$$$$$********************************" + e.getStackTrace()[0].getMethodName() + " : " + e.toString());
                 return new View(context);
             }
         }

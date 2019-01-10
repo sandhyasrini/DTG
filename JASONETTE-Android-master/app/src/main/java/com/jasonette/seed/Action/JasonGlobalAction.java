@@ -170,19 +170,7 @@ public class JasonGlobalAction {
             FileWriter writer = new FileWriter( myFile.getAbsoluteFile(), true );
             JsonParser jsonParser = new JsonParser();
 
-            //Putting the contents of JSON file into a JSONObject using JSONParser
 
-
-            //ReaDING FROM file
-//            BufferedReader br = new BufferedReader(new FileReader(myFile));
-//            StringBuilder sb = new StringBuilder();
-//            String line = br.readLine();
-//
-//            while (line != null) {
-//                sb.append( line );
-//                sb.append( "\n" );
-//                line = br.readLine();
-//            }
 
 
             Iterator<String> keysIterator = options.keys();
@@ -206,7 +194,9 @@ public class JasonGlobalAction {
             while (keysIterator.hasNext()) {
 
                 String key = (String) keysIterator.next();
-                Object val = options.get( key );
+                Object val = options.getString( key );
+
+
 
                 if (!key.equals( "section_id" )) {
                     editor.putString( key, val.toString() );
@@ -225,10 +215,11 @@ public class JasonGlobalAction {
                 while (keysIterator.hasNext()) {
 
                     String key = (String) keysIterator.next();
-                    Object val = options.get( key );
+                    String val = options.getString( key );
+                    Log.d( TAG, "set the global  " + key + " ==============>" +val );
 
 
-                        editor.putString( key, val.toString() );
+                        editor.putString( key, val );
                         ((Launcher) context.getApplicationContext()).setGlobal( key, val );
 
 

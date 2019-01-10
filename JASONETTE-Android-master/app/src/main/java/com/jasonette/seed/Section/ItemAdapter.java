@@ -529,8 +529,8 @@ public class ItemAdapter extends RecyclerView.Adapter <ItemAdapter.ViewHolder>{
                         GradientDrawable gd = new GradientDrawable();
                         gd.setShape(GradientDrawable.RECTANGLE);
                         gd.setColor( Color.parseColor( "#ffffff" ) );
-                        gd.setStroke(2,  scolor);
-                        gd.setBounds(2, 2, 2, 2);
+                        gd.setStroke(1,  scolor);
+                        gd.setBounds(1, 1, 1, 1);
                         layout.setBackground(gd);
                     }
 
