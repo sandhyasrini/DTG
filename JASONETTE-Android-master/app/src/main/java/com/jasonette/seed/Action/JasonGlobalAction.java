@@ -158,16 +158,16 @@ public class JasonGlobalAction {
 
 
         try {
-            SharedPreferences pref = context.getSharedPreferences("global", 0);
+            SharedPreferences pref = context.getSharedPreferences( "global", 0 );
             SharedPreferences.Editor editor = pref.edit();
 
-            JSONObject options = action.getJSONObject("options");
+            JSONObject options = action.getJSONObject( "options" );
             JSONObject jo = new JSONObject();
             JSONObject jsonObj = new JSONObject();
 
             //File processing
-            File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
-            FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
+            File myFile = new File( Environment.getExternalStorageDirectory(), "DT/json/field.json" );
+            FileWriter writer = new FileWriter( myFile.getAbsoluteFile(), true );
             JsonParser jsonParser = new JsonParser();
 
             //Putting the contents of JSON file into a JSONObject using JSONParser
@@ -186,40 +186,54 @@ public class JasonGlobalAction {
 
 
             Iterator<String> keysIterator = options.keys();
-            String section_name = (String) options.get("section_id");
+                if (options.has( "section_id" ))
+            {
+                String section_name = (String) options.get( "section_id" );
 
             JsonObject jsonArray = new JsonObject();
             JsonObject student = new JsonObject();
-            JsonElement obj = jsonParser.parse(new FileReader(myFile));
-            if(obj.isJsonNull()) {
+            JsonElement obj = jsonParser.parse( new FileReader( myFile ) );
+            if (obj.isJsonNull()) {
 
-            }
-            else {
+            } else {
                 student = (JsonObject) obj;
-                if(student.has(section_name))
-                {
-                    jsonArray = student.getAsJsonObject(section_name);
+                if (student.has( section_name )) {
+                    jsonArray = student.getAsJsonObject( section_name );
                 }
             }
-            Log.d( TAG, "value from json file" + jsonArray  + " and the section id is " );
+            Log.d( TAG, "value from json file" + jsonArray + " and the section id is " );
 
             while (keysIterator.hasNext()) {
 
                 String key = (String) keysIterator.next();
-                Object val = options.get(key);
+                Object val = options.get( key );
 
-                if(!key.equals("section_id") ) {
+                if (!key.equals( "section_id" )) {
                     editor.putString( key, val.toString() );
                     ((Launcher) context.getApplicationContext()).setGlobal( key, val );
-                    jsonArray.addProperty( key,  val.toString() );
+                    jsonArray.addProperty( key, val.toString() );
                 }
 
             }
-            student.add( section_name ,jsonArray );
-            FileWriter file = new FileWriter(myFile);
-            file.write(student.toString());
+            student.add( section_name, jsonArray );
+            FileWriter file = new FileWriter( myFile );
+            file.write( student.toString() );
             file.flush();
             file.close();
+        }
+        else{
+                while (keysIterator.hasNext()) {
+
+                    String key = (String) keysIterator.next();
+                    Object val = options.get( key );
+
+
+                        editor.putString( key, val.toString() );
+                        ((Launcher) context.getApplicationContext()).setGlobal( key, val );
+
+
+                }
+            }
 
 
 
