@@ -1,15 +1,11 @@
 <resources>
-
     <string name="app_name">DGX Form</string>
-    <!--<string name="url">https://pvybhav.github.io/DGX_Form/LeachTankShiftReport/forms/screen_1.json</string>-->
-<<<<<<< HEAD
-    <!--<string name="url">https://s3.amazonaws.com/enu-digital-ips/dg-forms-static/home.json</string>-->
-    <!--<string name="url">https://pvybhav.github.io/json/Global_Variables/screen-1.json</string>-->
-    <string name="url">file://index.json</string>
-=======
-    <!--<string name="url">https://s3.amazonaws.com/enu-digital-ips/dg-forms/home.json</string>-->
-    <string name="url">https://pvybhav.github.io/json/switch1/index.json</string>
-    <!--<string name="url">file://index1.json</string>-->
->>>>>>> f6a8afd74eb9205387138a8aa0fa084271c5d9fc
+
+    <!--DEVELOPMENT PATH-->
+    <!--<string name="url">https://s3.amazonaws.com/enu-digital-ips/development/home.json</string>-->
+
+    <!--PRODUCTION PATH-->
+    <string name="url">https://s3.amazonaws.com/enu-digital-ips/release/production/home.json</string>
+
     <string name="launch">file://preload.json</string>
 </resources>
