@@ -30,6 +30,11 @@ import org.json.JSONObject;
 public class JasonTextfieldComponent {
 
     public static View build(View view, final JSONObject component, final JSONObject parent, final Context context) {
+
+        int bgColor;
+        int borderWidth;
+        int cornerWidth;
+
         if(view == null){
             return new EditText(context);
         } else {
@@ -46,6 +51,55 @@ public class JasonTextfieldComponent {
                 if (style.has("color:placeholder")) {
                     int color = JasonHelper.parse_color(style.getString("color:placeholder"));
                     ((TextView)view).setHintTextColor(color);
+                }
+                if(style.has( "background" )){
+                    bgColor = JasonHelper.parse_color(style.getString("background"));
+                }
+
+                else {
+                    bgColor =  Color.parseColor( "#ffffff" );
+                }
+
+                if(style.has("border_width")){
+                    borderWidth = Integer.parseInt(style.getString("border_width"));
+                }
+                else {
+                    borderWidth= 1;
+                }
+                if(style.has("corner_width")){
+                    cornerWidth = Integer.parseInt( (style.getString( "corner_width" )) );
+
+                }
+                else {
+                    cornerWidth = 0;
+                }
+
+                if(style.has("border")){
+
+                    int color = JasonHelper.parse_color(style.getString("border"));
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setShape(GradientDrawable.RECTANGLE);
+                    gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
+                    gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
+                    gd.setStroke(borderWidth,  color);
+                    gd.setCornerRadius( cornerWidth );
+                    gd.setBounds(2, 2, 2, 2);
+                    view.setBackground(gd);
+
+
+                }
+
+                if(style.has("corner_width")){
+
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setShape(GradientDrawable.RECTANGLE);
+                    gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
+                    gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
+                    gd.setCornerRadius( cornerWidth );
+                    gd.setBounds(2, 2, 2, 2);
+                    view.setBackground(gd);
+
+
                 }
 
                 if (style.has("align")) {
@@ -116,16 +170,6 @@ public class JasonTextfieldComponent {
                 }
 
                 view.setPadding(padding_left, padding_top, padding_right, padding_bottom);
-
-                if(style.has("border")){
-                    int color = JasonHelper.parse_color(style.getString("border"));
-                    GradientDrawable gd = new GradientDrawable();
-                    gd.setShape(GradientDrawable.RECTANGLE);
-                    gd.setColor( Color.parseColor( "#ffffff" ) );
-                    gd.setStroke(2,  color);
-                    gd.setBounds(2, 2, 2, 2);
-                    view.setBackground(gd);
-                }
 
 
                 // placeholder
