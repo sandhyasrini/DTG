@@ -229,6 +229,11 @@ public class JasonImageComponent {
                 }
                 type = component.getString("type");
 
+                //Setting content description. realwear uses this as voice tag
+                if (component.has("contentDescription")) {
+                    view.setContentDescription(component.getString("contentDescription"));
+                }
+
                 if (component.has("url")) {
                     if(component.getString("url").contains("file://")){
                         if (corner_radius == 0) {
