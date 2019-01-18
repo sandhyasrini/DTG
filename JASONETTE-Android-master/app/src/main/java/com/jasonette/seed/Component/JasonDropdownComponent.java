@@ -35,7 +35,7 @@ public class JasonDropdownComponent {
 
 
                 if (component.has("name")) {
-                    Log.i("Name--->", component.getString("name"));
+                    //Log.i("Name--->", component.getString("name"));
                     String[] items;
                     //Log.i("Content Description--->", component.getString("contentDescription"));
 
@@ -71,7 +71,7 @@ public class JasonDropdownComponent {
 
                     //Setting content description. realwear uses this as voice tag
                     if (component.has("contentDescription")) {
-                        Log.i("Content Description--->", component.getString("contentDescription"));
+                       // Log.i("Content Description--->", component.getString("contentDescription"));
                         ((Spinner) view).setContentDescription(component.getString("contentDescription"));
                     }
                     if (style.has("border")) {
@@ -92,7 +92,7 @@ public class JasonDropdownComponent {
 
 
                     if (component.has("value")) {
-                        Log.i("Value--->", component.getString("value"));
+                       // Log.i("Value--->", component.getString("value"));
                         try {
                             isDefaultVal = false;
                             //defaultSelPos = Integer.parseInt(component.getString("value"));

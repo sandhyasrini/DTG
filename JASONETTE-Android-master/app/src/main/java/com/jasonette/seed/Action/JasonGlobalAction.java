@@ -85,8 +85,8 @@ public class JasonGlobalAction {
                         MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
                                 new MediaScannerConnection.OnScanCompletedListener() {
                                     public void onScanCompleted(String path, Uri uri) {
-                                        Log.i("ExternalStorage", "Scanned " + path + ":");
-                                        Log.i("ExternalStorage", "-> uri=" + uri);
+//                                        Log.i("ExternalStorage", "Scanned " + path + ":");
+//                                        Log.i("ExternalStorage", "-> uri=" + uri);
                                     }
                                 });
                         if(!jsonFile.exists()) {
@@ -96,14 +96,14 @@ public class JasonGlobalAction {
                         JsonElement obj = jsonParser.parse(new FileReader(myFile));
                         if(myFile.delete())
                         {
-                            Log.d("button", "build: deleted");
+                            //.d("button", "build: deleted");
                         }
                         if(obj.isJsonNull()) {
                             jsonFile.delete();
                         }
                         else {
                             student = (JsonObject) obj;
-                            Log.d("button", "build: " + student);
+                            //Log.d("button", "build: " + student);
                             String content = student.toString();
 //                            FileWriter file = new FileWriter(jsonFile);
                             writer.write(content);
@@ -201,7 +201,7 @@ public class JasonGlobalAction {
                     jsonArray = student.getAsJsonObject( section_name );
                 }
             }
-            Log.d( TAG, "value from json file" + jsonArray + " and the section id is " );
+            //Log.d( TAG, "value from json file" + jsonArray + " and the section id is " );
 
             while (keysIterator.hasNext()) {
 
