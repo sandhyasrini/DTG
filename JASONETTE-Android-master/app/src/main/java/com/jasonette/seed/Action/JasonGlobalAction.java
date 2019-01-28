@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Writer;
 import java.sql.Timestamp;
 import java.util.Iterator;
@@ -74,13 +75,13 @@ public class JasonGlobalAction {
                 if (options.getString("save").equalsIgnoreCase("true")) {
 
                     if (options.has("filename")) {
-                        File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
+                        File myFile = new File( Environment.getExternalStorageDirectory() , "DGX/json/field.json" );
                         String timestamp = String.valueOf(new Timestamp(System.currentTimeMillis()));
                         timestamp = timestamp.replace(" " , "_");
                         JsonParser jsonParser = new JsonParser();
-                        JsonObject student ;
+                        JsonObject jsonFileContent ;
                         String filename = options.getString("filename");
-                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + timestamp + ".json");
+                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DGX/json/" + filename + "_" + timestamp + ".json");
                         FileWriter writer  = new FileWriter(jsonFile.getAbsoluteFile() , true);
                         MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
                                 new MediaScannerConnection.OnScanCompletedListener() {
@@ -102,9 +103,9 @@ public class JasonGlobalAction {
                             jsonFile.delete();
                         }
                         else {
-                            student = (JsonObject) obj;
-                            Log.d("button", "build: " + student);
-                            String content = student.toString();
+                            jsonFileContent = (JsonObject) obj;
+                            Log.d("button", "build: " + jsonFileContent);
+                            String content = jsonFileContent.toString();
 //                            FileWriter file = new FileWriter(jsonFile);
                             writer.write(content);
                             writer.flush();
@@ -166,7 +167,7 @@ public class JasonGlobalAction {
             JSONObject jsonObj = new JSONObject();
 
             //File processing
-            File myFile = new File( Environment.getExternalStorageDirectory(), "DT/json/field.json" );
+            File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/json/field.json" );
             FileWriter writer = new FileWriter( myFile.getAbsoluteFile(), true );
             JsonParser jsonParser = new JsonParser();
 
@@ -177,17 +178,34 @@ public class JasonGlobalAction {
                 if (options.has( "section_id" ))
             {
                 String section_name = (String) options.get( "section_id" );
+                String json_name = section_name.split( "_" )[0];
 
             JsonObject jsonArray = new JsonObject();
-            JsonObject student = new JsonObject();
+            JsonObject jsonFileContent = new JsonObject();
             JsonElement obj = jsonParser.parse( new FileReader( myFile ) );
             if (obj.isJsonNull()) {
 
             } else {
-                student = (JsonObject) obj;
-                if (student.has( section_name )) {
-                    jsonArray = student.getAsJsonObject( section_name );
+
+                JsonObject jsonFile = (JsonObject) obj;
+
+                if(jsonFile.has("json_id"))
+                {
+                    String jsonFileName = jsonFile.get("json_id").getAsString();
+                    if(json_name.equals( jsonFileName))
+                    {
+                        jsonFileContent = (JsonObject) obj;
+                        if (jsonFileContent.has( section_name )) {
+                            jsonArray = jsonFileContent.getAsJsonObject( section_name );
+                        }
+                    }
+                    else{
+                        myFile.delete();
+                        myFile.createNewFile();
+                    }
+
                 }
+
             }
             Log.d( TAG, "value from json file" + jsonArray + " and the section id is " );
 
@@ -205,9 +223,11 @@ public class JasonGlobalAction {
                 }
 
             }
-            student.add( section_name, jsonArray );
+            jsonFileContent.addProperty("json_id",json_name);
+            jsonFileContent.add( section_name, jsonArray );
+
             FileWriter file = new FileWriter( myFile );
-            file.write( student.toString() );
+            file.write( jsonFileContent.toString() );
             file.flush();
             file.close();
         }

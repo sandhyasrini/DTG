@@ -1,7 +1,9 @@
 package com.jasonette.seed.Component;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ public class JasonSwitchComponent {
                 final Switch aSwitch = ((Switch) view);
 
                 Boolean checked = false;
+                Boolean isClickable = true;
 //                float scaleX = 10;
 //                float scaleY = 10;
                 float text_size;
@@ -34,7 +37,6 @@ public class JasonSwitchComponent {
                     } else {
                         if(component.has("value")){
                             String name = component.getString( "value" );
-                            Log.d( "mytag", "build:1111111111111111111111111111111111111111111 " + checked );
 //                            checked = component.getBoolean("value");
                             checked = Boolean.valueOf( name );
                         }
@@ -47,14 +49,40 @@ public class JasonSwitchComponent {
                     }
                 }
 
-
-
                 if(component.has("switch_text")){
                     aSwitch.setText(component.getString("switch_text"));
                 }
+
+                //Custom field- TO make Switch readonly if isClickable id false.
+                if(component.has("isClickable")){
+                    isClickable = component.getBoolean("isClickable");
+                }
+
                 final JSONObject style = JasonHelper.style(component, context);
 
                 aSwitch.setChecked(checked);
+                aSwitch.setClickable(isClickable);
+
+                int bgColor = Color.parseColor( "#ffffff" );
+                if(style.has( "background" )){
+                    bgColor = JasonHelper.parse_color(style.getString("background"));
+                }
+                if(style.has("border")){
+                    int color = JasonHelper.parse_color(style.getString("border"));
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setShape(GradientDrawable.RECTANGLE);
+                    gd.setColor( bgColor );
+                    gd.setStroke(1,  color);
+                    gd.setBounds(1, 1, 1, 1);
+                    view.setBackground(gd);
+                }
+                else {
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setShape(GradientDrawable.RECTANGLE);
+                    gd.setColor( bgColor );
+                    view.setBackground(gd);
+                }
+
                 if(style.has("textsize")){
                     text_size = Float.parseFloat(style.getString("textsize"));
                     aSwitch.setTextSize(text_size);
@@ -79,7 +107,6 @@ public class JasonSwitchComponent {
                 view.requestLayout();
                 return view;
             } catch (Exception e){
-                Log.d("Warning", "222222222222222222222222222222222222222222222222222222$$$$$$$$$********************************" + e.getStackTrace()[0].getMethodName() + " : " + e.toString());
                 return new View(context);
             }
         }
@@ -130,3 +157,20 @@ public class JasonSwitchComponent {
         }
     }
 }
+
+
+//Sample JSON object:
+//
+//  {
+//          "type": "switch",
+//          "name": "light",
+//          "value": "false",
+//          "isClickable" : "true",
+//          "action": {
+//          "type": "$util.toast",
+//          "options": {
+//          "text" :"{{$get.light}}",
+//          "type": "warning"
+//                }
+//          }
+//  }

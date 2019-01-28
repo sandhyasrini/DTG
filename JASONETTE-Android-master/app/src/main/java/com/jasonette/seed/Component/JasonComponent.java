@@ -128,7 +128,7 @@ public class JasonComponent {
                 // border + corner_radius handling
                 if (style.has("border_width")){
                     int border_width = (int)JasonHelper.pixels(root_context, style.getString("border_width"), "horizontal");
-                    if(border_width > 0){
+                     if(border_width > 0){
                         int border_color;
                         if (style.has("border_color")){
                             border_color = JasonHelper.parse_color(style.getString("border_color"));

@@ -270,7 +270,7 @@ public class JasonMediaAction {
     private File createFile(String type, Context context) throws IOException {
         // Create an image file name
 
-        File storageDir = new File( android.os.Environment.getExternalStorageDirectory() ,"DT/Pictures" );
+        File storageDir = new File( android.os.Environment.getExternalStorageDirectory() ,"DGX/Pictures" );
 
         File f;
         if(type.equalsIgnoreCase("image")) {

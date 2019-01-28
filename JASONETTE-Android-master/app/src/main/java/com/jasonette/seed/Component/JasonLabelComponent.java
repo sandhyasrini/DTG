@@ -76,7 +76,7 @@ public class JasonLabelComponent {
                     gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
                     gd.setStroke(borderWidth,  color);
                     gd.setCornerRadius( cornerWidth );
-                    gd.setBounds(2, 2, 2, 2);
+                    gd.setBounds(1, 1, 1, 1);
                     view.setBackground(gd);
 
 

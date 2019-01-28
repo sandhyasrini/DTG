@@ -58,6 +58,9 @@ public class JasonTextfieldComponent {
                         ((EditText)view).setGravity(Gravity.LEFT);
                     }
                 }
+                if(style.has( "disable" )) {
+                    ((EditText)view).setEnabled( false );
+                }
                 if (style.has("height") && style.has("width")) {
                     int  height = (int) JasonHelper.pixels(context, style.getString("height"), "horizontal");
                     int  width = (int) JasonHelper.pixels(context, style.getString("width"), "horizontal");
@@ -72,7 +75,7 @@ public class JasonTextfieldComponent {
                 } else if (style.has("width")) {
                     int  width = (int) JasonHelper.pixels(context, style.getString("width"), "horizontal");
 
-                    ((EditText)view).setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    ((EditText)view).setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.MATCH_PARENT));
 
                 }
 
@@ -117,13 +120,17 @@ public class JasonTextfieldComponent {
 
                 view.setPadding(padding_left, padding_top, padding_right, padding_bottom);
 
+                int bgColor = Color.parseColor( "#ffffff" );
+                if(style.has( "background" )){
+                    bgColor = JasonHelper.parse_color(style.getString("background"));
+                }
                 if(style.has("border")){
                     int color = JasonHelper.parse_color(style.getString("border"));
                     GradientDrawable gd = new GradientDrawable();
                     gd.setShape(GradientDrawable.RECTANGLE);
-                    gd.setColor( Color.parseColor( "#ffffff" ) );
-                    gd.setStroke(2,  color);
-                    gd.setBounds(2, 2, 2, 2);
+                    gd.setColor( bgColor );
+                    gd.setStroke(1,  color);
+                    gd.setBounds(1, 1, 1, 1);
                     view.setBackground(gd);
                 }
 
@@ -247,6 +254,7 @@ public class JasonTextfieldComponent {
                             ((TextView) view).setTypeface(Typeface.DEFAULT);
                         }
                     }
+
                 }
 
                 view.requestLayout();

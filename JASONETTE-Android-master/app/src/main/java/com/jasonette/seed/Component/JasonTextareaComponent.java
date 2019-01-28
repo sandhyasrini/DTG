@@ -2,7 +2,9 @@ package com.jasonette.seed.Component;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.Editable;
 import android.text.InputType;
@@ -38,6 +40,9 @@ public class JasonTextareaComponent {
                 if (style.has("color:placeholder")) {
                     int color = JasonHelper.parse_color(style.getString("color:placeholder"));
                     ((TextView)view).setHintTextColor(color);
+                }
+                if(style.has( "disable" )) {
+                    ((TextView)view).setEnabled( false );
                 }
 
                 if (style.has("font:android")){
@@ -81,6 +86,21 @@ public class JasonTextareaComponent {
                     layoutParams.height = 300;
                     view.setLayoutParams(layoutParams);
                 }
+                int bgColor = Color.parseColor( "#ffffff" );
+                if(style.has( "background" )){
+                    bgColor = JasonHelper.parse_color(style.getString("background"));
+                }
+
+                if(style.has("border")){
+                    int color = JasonHelper.parse_color(style.getString("border"));
+                    GradientDrawable gd = new GradientDrawable();
+                    gd.setShape(GradientDrawable.RECTANGLE);
+                    gd.setColor( bgColor );
+                    gd.setStroke(1,  color);
+                    gd.setBounds(1, 1, 1, 1);
+                    view.setBackground(gd);
+                }
+
 
                 int g = 0;
                 if (style.has("align")) {

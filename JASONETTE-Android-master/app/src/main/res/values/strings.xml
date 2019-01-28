@@ -1,9 +1,10 @@
 <resources>
 
-    <string name="app_name">Sample</string>
-    <!--<string name="url">https://pvybhav.github.io/DGX_Form/LeachTankShiftReport/forms/screen_1.json</string>-->
-    <!--<string name="url">https://s3.amazonaws.com/enu-digital-ips/dg-forms/home.json</string>-->
-    <!--<string name="url">https://pvybhav.github.io/json/switch1/index.json</string>-->
-            <string name="url">https://pvybhav.github.io/DGX_Form/SafetyReport/forms/screen_1.json</string>
+    <string name="app_name">Form</string>
+    <!--<string name="url">https://pvybhav.github.io/DGX_Form/TrashScreenShiftReport/screen_1.json</string>-->
+    <string name="url">https://s3.amazonaws.com/enu-digital-ips/release/production/home.json</string>
     <string name="launch">file://loading.json</string>
+    <!--<string name="url">https://pvybhav.github.io/DGX_Form/CyanideIsotainer/screen_1.json</string>-->
+    <!--<string name="url">file://index1.json</string>-->
+
 </resources>

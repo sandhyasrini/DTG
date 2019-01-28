@@ -84,14 +84,14 @@ public class JasonImageComponent {
             }
             else if (url.contains("local://")) {
 
-                Log.d( "localFile", "resolve_url: " +   Environment.getExternalStorageDirectory()   + "/DT/Pictures/" + url.substring(8));
+                Log.d( "localFile", "resolve_url: " +   Environment.getExternalStorageDirectory()   + "/DGX/Pictures/" + url.substring(8));
 
                 if(url.substring( 8 ).contains( "{{$jason.file_name}}"))
                 {
                     return "file:///android_asset/file/noimage.jpg";
                 }
                 else{
-                    return Environment.getExternalStorageDirectory()   + "/DT/Pictures/"  +url.substring( 8 ) + ".jpg";
+                    return Environment.getExternalStorageDirectory()   + "/DGX/Pictures/"  +url.substring( 8 ) + ".jpg";
 
                 }
             }

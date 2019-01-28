@@ -126,7 +126,7 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
     public View focusView = null;
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 0;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.CAMERA,
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -1712,11 +1712,11 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                 if (jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = jason.getJSONObject("$jason").getJSONObject("head");
 
-                        File folder = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/");
+                        File folder = new File( Environment.getExternalStorageDirectory()   ,"/DGX/json/");
                         if(!folder.exists()) {
                             folder.mkdirs();
                         }
-                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/field.json");
+                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DGX/json/field.json");
                         if(!jsonFile.exists()) {
                             jsonFile.createNewFile();
                         }
@@ -2055,8 +2055,8 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                             int scolor = JasonHelper.parse_color(border);
                             GradientDrawable gd = new GradientDrawable();
                             gd.setShape(GradientDrawable.RECTANGLE);
-                            gd.setStroke(2,  scolor);
-                            gd.setBounds(2, 2, 2, 2);
+                            gd.setStroke(1,  scolor);
+                            gd.setBounds(1, 1 ,1, 1);
                             listView.setBackground(gd);
                         }
                     } else {
@@ -2066,8 +2066,8 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                         int scolor = JasonHelper.parse_color(border);
                         GradientDrawable gd = new GradientDrawable();
                         gd.setShape(GradientDrawable.RECTANGLE);
-                        gd.setStroke(2,  scolor);
-                        gd.setBounds(2, 2, 2, 2);
+                        gd.setStroke(1,  scolor);
+                        gd.setBounds(1, 1 ,1, 1);
                         listView.setBackground(gd);
                     }
 

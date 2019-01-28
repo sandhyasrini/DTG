@@ -49,12 +49,12 @@ public class JasonButtonComponent{
                 if(component.has("save")) {
 //                    if (component.getString("save").equalsIgnoreCase("true")) {
 //                        if (component.has("filename")) {
-//                            File myFile = new File( Environment.getExternalStorageDirectory() , "DT/json/field.json" );
+//                            File myFile = new File( Environment.getExternalStorageDirectory() , "DGX/json/field.json" );
 //                            FileWriter writer  = new FileWriter(myFile.getAbsoluteFile() , true);
 //                            JsonParser jsonParser = new JsonParser();
 //                            JsonObject student ;
 //                            String filename = component.getString("filename");
-//                            File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DT/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
+//                            File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DGX/json/" + filename + "_" + new Timestamp(System.currentTimeMillis()) + ".json");
 //
 //                            MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
 //                                    new MediaScannerConnection.OnScanCompletedListener() {
