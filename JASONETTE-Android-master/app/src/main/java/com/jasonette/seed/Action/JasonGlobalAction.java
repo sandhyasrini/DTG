@@ -86,8 +86,8 @@ public class JasonGlobalAction {
                         MediaScannerConnection.scanFile(context, new String[]{jsonFile.getAbsolutePath() }, null,
                                 new MediaScannerConnection.OnScanCompletedListener() {
                                     public void onScanCompleted(String path, Uri uri) {
-                                        Log.i("ExternalStorage", "Scanned " + path + ":");
-                                        Log.i("ExternalStorage", "-> uri=" + uri);
+//                                        Log.i("ExternalStorage", "Scanned " + path + ":");
+//                                        Log.i("ExternalStorage", "-> uri=" + uri);
                                     }
                                 });
                         if(!jsonFile.exists()) {
@@ -97,7 +97,7 @@ public class JasonGlobalAction {
                         JsonElement obj = jsonParser.parse(new FileReader(myFile));
                         if(myFile.delete())
                         {
-                            Log.d("button", "build: deleted");
+                            //.d("button", "build: deleted");
                         }
                         if(obj.isJsonNull()) {
                             jsonFile.delete();
@@ -207,7 +207,7 @@ public class JasonGlobalAction {
                 }
 
             }
-            Log.d( TAG, "value from json file" + jsonArray + " and the section id is " );
+            //Log.d( TAG, "value from json file" + jsonArray + " and the section id is " );
 
             while (keysIterator.hasNext()) {
 
