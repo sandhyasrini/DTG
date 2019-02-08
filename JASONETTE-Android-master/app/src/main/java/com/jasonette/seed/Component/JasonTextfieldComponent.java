@@ -74,19 +74,17 @@ public class JasonTextfieldComponent {
                     cornerWidth = 0;
                 }
 
+                if(style.has( "background" )){
+                    bgColor = JasonHelper.parse_color(style.getString("background"));
+                }
                 if(style.has("border")){
-
                     int color = JasonHelper.parse_color(style.getString("border"));
                     GradientDrawable gd = new GradientDrawable();
                     gd.setShape(GradientDrawable.RECTANGLE);
-                    gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
-                    gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
-                    gd.setStroke(borderWidth,  color);
-                    gd.setCornerRadius( cornerWidth );
-                    gd.setBounds(2, 2, 2, 2);
+                    gd.setColor( bgColor );
+                    gd.setStroke(1,  color);
+                    gd.setBounds(1, 1, 1, 1);
                     view.setBackground(gd);
-
-
                 }
 
                 if(style.has("corner_width")){
@@ -174,23 +172,10 @@ public class JasonTextfieldComponent {
 
                 view.setPadding(padding_left, padding_top, padding_right, padding_bottom);
 
-<<<<<<< HEAD
-                int bgColor = Color.parseColor( "#ffffff" );
-                if(style.has( "background" )){
-                    bgColor = JasonHelper.parse_color(style.getString("background"));
-                }
-                if(style.has("border")){
-                    int color = JasonHelper.parse_color(style.getString("border"));
-                    GradientDrawable gd = new GradientDrawable();
-                    gd.setShape(GradientDrawable.RECTANGLE);
-                    gd.setColor( bgColor );
-                    gd.setStroke(1,  color);
-                    gd.setBounds(1, 1, 1, 1);
-                    view.setBackground(gd);
-                }
 
-=======
->>>>>>> 9cdbf36d6f6ed7422faf04771283e91eb09acdc9
+
+
+
 
                 // placeholder
                 if(component.has("placeholder")){
