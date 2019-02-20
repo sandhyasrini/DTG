@@ -92,17 +92,21 @@ public class JasonDropdownComponent {
 
 
                     if (component.has("value")) {
-                       // Log.i("Value--->", component.getString("value"));
+//                       Log.i("DropdownValue--->","Dropdown value: "+ component.getString("value"));
+//                        Log.i("DropdownValue--->","Dropdown has value: "+ component.has("value"));
                         try {
-                            isDefaultVal = false;
-                            //defaultSelPos = Integer.parseInt(component.getString("value"));
-                            JSONArray arrOfElements = component.getJSONArray("options");
-                            for (int i = 0; i < arrOfElements.length(); i++) {
-                                JSONObject optionObj = arrOfElements.getJSONObject(i);
-                                if(optionObj.getString("value").trim().equals(component.getString("value").trim()))
-                                {
-                                    defaultSelPos = i;
-                                    break;
+                            //On first load, the Value field contains null/empty, because $global variable has not yet set,
+                            // So the global contains value like( "{{$global.xyz}}").
+                            if(!component.getString("value").startsWith("{{")) {
+                                isDefaultVal = false;
+                                //defaultSelPos = Integer.parseInt(component.getString("value"));
+                                JSONArray arrOfElements = component.getJSONArray("options");
+                                for (int i = 0; i < arrOfElements.length(); i++) {
+                                    JSONObject optionObj = arrOfElements.getJSONObject(i);
+                                    if (optionObj.getString("value").trim().equals(component.getString("value").trim())) {
+                                        defaultSelPos = i;
+                                        break;
+                                    }
                                 }
                             }
                         } catch (NumberFormatException e) {

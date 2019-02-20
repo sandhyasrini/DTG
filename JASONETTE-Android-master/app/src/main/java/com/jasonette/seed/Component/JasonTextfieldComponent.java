@@ -94,7 +94,7 @@ public class JasonTextfieldComponent {
                     gd.setGradientType( GradientDrawable.LINEAR_GRADIENT );
                     gd.setColor( bgColor  ); // Changes this drawbale to use a single color instead of a gradient
                     gd.setCornerRadius( cornerWidth );
-                    gd.setBounds(2, 2, 2, 2);
+                    gd.setBounds(1, 1, 1, 1);
                     view.setBackground(gd);
 
 
@@ -171,10 +171,6 @@ public class JasonTextfieldComponent {
                 }
 
                 view.setPadding(padding_left, padding_top, padding_right, padding_bottom);
-
-
-
-
 
 
                 // placeholder
