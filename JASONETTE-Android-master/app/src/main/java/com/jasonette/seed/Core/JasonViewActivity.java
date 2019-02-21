@@ -53,6 +53,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.jasonette.seed.Component.JasonComponentFactory;
 import com.jasonette.seed.Component.JasonImageComponent;
 import com.jasonette.seed.Helper.JasonHelper;
@@ -71,13 +74,16 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -1712,14 +1718,48 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                 if (jason.getJSONObject("$jason").has("head")) {
                     final JSONObject head = jason.getJSONObject("$jason").getJSONObject("head");
 
-                        File folder = new File( Environment.getExternalStorageDirectory()   ,"/DGX/json/");
-                        if(!folder.exists()) {
+                    JsonObject jsonData = new JsonObject();
+                    SharedPreferences pref = this.getSharedPreferences( "global", 0 );
+                    SharedPreferences.Editor editor = pref.edit();
+
+                    if(head.has( "form_id" )) {
+                        String jason_name = jason.getJSONObject( "$jason" ).getJSONObject( "head" ).getString( "form_id" );
+                        File folder = new File( Environment.getExternalStorageDirectory(), "/DGX/json/" );
+                        if (!folder.exists()) {
                             folder.mkdirs();
                         }
-                        File jsonFile = new File( Environment.getExternalStorageDirectory()   ,"/DGX/json/field.json");
-                        if(!jsonFile.exists()) {
+                        File jsonFile = new File( Environment.getExternalStorageDirectory(), "/DGX/json/" + jason_name + "_temp_file.json" );
+                        if (!jsonFile.exists()) {
                             jsonFile.createNewFile();
+                        } else {
+                            JsonParser jsonParser = new JsonParser();
+                            JsonElement obj = jsonParser.parse( new FileReader( jsonFile ) );
+                            if (obj.isJsonNull()) {
+
+                            } else {
+
+                                JsonObject jsoncontent = (JsonObject) obj;
+                                if (jsoncontent.has( "json_id" )) {
+                                    jsonData = jsoncontent.getAsJsonObject( jsoncontent.get( "json_id" ).getAsString() );
+                                    Log.d( "data", " " + jsonData.keySet() );
+                                    String[] value = jsonData.keySet().toArray( new String[0] );
+
+
+                                    for (int i = 0; i < value.length; i++) {
+
+                                        String key = value[i];
+                                        Log.d( "data", " " + jsonData.get( key ) + " key " + key );
+                                        String val = jsonData.get( key ).getAsString();
+                                        editor.putString( key, val );
+                                        ((Launcher) this.getApplicationContext()).setGlobal( key, val );
+
+
+                                    }
+                                }
+                            }
+
                         }
+                    }
 
 
 
