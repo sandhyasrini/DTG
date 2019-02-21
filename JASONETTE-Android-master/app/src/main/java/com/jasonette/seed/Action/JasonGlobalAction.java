@@ -72,8 +72,10 @@ public class JasonGlobalAction {
             if (options.has( "save" )) {
                 if (options.getString( "save" ).equalsIgnoreCase( "true" )) {
 
+                if(options.has("form_id")){
+                    String form_id = options.getString( "form_id" );
                     if (options.has( "filename" )) {
-                        File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/json/field.json" );
+                        File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/json/" +form_id +"_temp_file.json" );
                         String timestamp = String.valueOf( new Timestamp( System.currentTimeMillis() ) );
                         timestamp = timestamp.replace( " ", "_" );
                         JsonParser jsonParser = new JsonParser();
@@ -111,6 +113,7 @@ public class JasonGlobalAction {
 
 
                     }
+                }
                 }
             }
 
