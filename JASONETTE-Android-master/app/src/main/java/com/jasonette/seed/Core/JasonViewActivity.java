@@ -1724,11 +1724,15 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
                     if(head.has( "form_id" )) {
                         String jason_name = jason.getJSONObject( "$jason" ).getJSONObject( "head" ).getString( "form_id" );
-                        File folder = new File( Environment.getExternalStorageDirectory(), "/DGX/json/" );
+                        File folder = new File( Environment.getExternalStorageDirectory(), "/DGX/temp/" );
                         if (!folder.exists()) {
                             folder.mkdirs();
                         }
-                        File jsonFile = new File( Environment.getExternalStorageDirectory(), "/DGX/json/" + jason_name + "_temp_file.json" );
+                        File folder_json = new File( Environment.getExternalStorageDirectory(), "/DGX/json/" );
+                        if (!folder_json.exists()) {
+                            folder_json.mkdirs();
+                        }
+                        File jsonFile = new File( Environment.getExternalStorageDirectory(), "/DGX/temp/" + jason_name + "_temp_file.json" );
                         if (!jsonFile.exists()) {
                             jsonFile.createNewFile();
                         } else {

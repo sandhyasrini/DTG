@@ -75,7 +75,7 @@ public class JasonGlobalAction {
                 if(options.has("form_id")){
                     String form_id = options.getString( "form_id" );
                     if (options.has( "filename" )) {
-                        File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/json/" +form_id +"_temp_file.json" );
+                        File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/temp/" +form_id +"_temp_file.json" );
                         String timestamp = String.valueOf( new Timestamp( System.currentTimeMillis() ) );
                         timestamp = timestamp.replace( " ", "_" );
                         JsonParser jsonParser = new JsonParser();
@@ -169,7 +169,7 @@ public class JasonGlobalAction {
 
             { //File processing
                 String section_name = (String) options.get( "section_id" );
-                File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/json/" + section_name + "_temp_file.json" );
+                File myFile = new File( Environment.getExternalStorageDirectory(), "DGX/temp/" + section_name + "_temp_file.json" );
                 FileWriter writer = new FileWriter( myFile.getAbsoluteFile(), true );
                 JsonParser jsonParser = new JsonParser();
 
