@@ -4,11 +4,11 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.wipro.dtwipro"
+        applicationId "com.wipro.dgxforms"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 10
-        versionName "0.10.7"
+        versionName "0.10.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

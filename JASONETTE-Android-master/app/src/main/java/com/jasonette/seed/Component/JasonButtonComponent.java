@@ -40,7 +40,14 @@ public class JasonButtonComponent{
             // label button
 
             view = JasonLabelComponent.build(view, component, parent, context);
-            view.setContentDescription("hf_use_text");
+            //view.setContentDescription("hf_use_text");
+            if(component.has("contentDescription")){
+                view.setContentDescription(component.getString("contentDescription"));
+            }
+            else
+            {
+                view.setContentDescription("hf_use_text");
+            }
 //            view.setBackgroundResource( R.drawable.rounded_corners);
 
 

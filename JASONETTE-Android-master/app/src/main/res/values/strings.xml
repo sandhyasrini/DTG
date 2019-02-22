@@ -4,10 +4,10 @@
 
     <!--DEVELOPMENT PATH-->
     <!--<string name="url">https://s3.amazonaws.com/enu-digital-ips/development/home.json</string>-->
-    <string name="url">https://pvybhav.github.io/DGX_Form/SecondaryCrusher/screen-1.json</string>
+    <!--<string name="url">https://pvybhav.github.io/DGX_Form/SecondaryCrusher/screen-1.json</string>-->
 
     <!--PRODUCTION PATH-->
-    <!--<string name="url">https://s3.amazonaws.com/enu-digital-ips/release/production/home.json</string>-->
+    <string name="url">https://s3.amazonaws.com/enu-digital-ips/release/production/home.json</string>
 
     <string name="launch">file://preload.json</string>
 </resources>

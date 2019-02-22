@@ -14,7 +14,7 @@ import com.jasonette.seed.Helper.JasonHelper;
 
 import org.json.JSONObject;
 
-import javax.annotation.Nullable;
+//import javax.annotation.Nullable;
 
 /**
  * Created by realitix on 27/07/17.
@@ -33,11 +33,11 @@ public class JasonToolbar extends Toolbar {
         super(context);
     }
 
-    public JasonToolbar(Context context, @Nullable AttributeSet attrs) {
+    public JasonToolbar(Context context,  AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public JasonToolbar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public JasonToolbar(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
