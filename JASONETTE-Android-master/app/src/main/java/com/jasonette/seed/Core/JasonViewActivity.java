@@ -2180,12 +2180,18 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
 
                     // if the first time being loaded
                     if(!loaded){
+
+                        //This piece of code allows to load temp json values to global object during offline mode.
+                        JSONObject jason = model.jason;
+                         build(jason);
+
                         // and if the content has finished fetching (not via remote: true)
-                        if(fetched) {
+                       // if(fetched) {  //This if condition is commented by Nagesh
+                                         //This condition is not allowing to load jason completly offline mode.
                             // trigger onLoad.
                             // onLoad shouldn't be triggered when just drawing the offline cached view initially
                             onLoad();
-                        }
+                        //}
                     }
 
                 } catch (Exception e) {
