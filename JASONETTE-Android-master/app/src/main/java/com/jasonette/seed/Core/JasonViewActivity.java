@@ -2105,7 +2105,13 @@ public class JasonViewActivity extends AppCompatActivity implements ActivityComp
                         }
                     } else {
                         setup_sections(null);
-                        String border = body.getJSONObject("style").getString("border");
+                        String border = "#eaeaea"; // Default color
+
+                        if (body.has("style") && body.getJSONObject("style").has("border")) {
+                            border = body.getJSONObject("style").getString("border");
+                        }
+
+                        //border = body.getJSONObject("style").getString("border");
 
                         int scolor = JasonHelper.parse_color(border);
                         GradientDrawable gd = new GradientDrawable();
