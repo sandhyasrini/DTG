@@ -7,7 +7,7 @@
       "layers": [
         {
           "type": "label",
-          "text": "You are offline! \n Please check your internet connection.",
+          "text": "You are offline! \n (Please check your internet connection. Load each form at least once with internet connection, so that forms are available in offline.)",
           "style": {
             "top": "50%",
             "align": "center",
